@@ -1,0 +1,39 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    
+<div id="app">
+    <p> {{ titulo }}</p>
+    <!-- Aqui dentro eu tenho acesso direto a data, methods, etc -->
+    <!-- Pra chamar funcoes de methods preciso chamar () apos o nome da mesma -->
+    <!-- O que é chamado dentro dos {{}} deve ser resolvido para string, ja que html so renderiza isso -->
+    <p>{{ vamoVerSeMuda }}</p>
+    <p>{{ showName() }}</p>
+    <hr>
+    <button @click="addMaisUmNome">Add</button>
+</div>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            titulo: 'My first use!!!!!!!',
+            arr: ['Tony', 'Lorena']
+        },
+        computed: {
+            vamoVerSeMuda() {
+                return this.arr.length;
+            },
+
+        },
+        methods: {
+            addMaisUmNome() {
+                console.log(this.arr.length)
+                this.arr.push('MaisUm');
+            },
+            showName: function() {
+                return `Relou MEiEiieeiEIIEs${this.vamoVerSeMuda}`
+            }
+        }
+    })
+</script>

@@ -1,0 +1,43 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <ul>
+        <!-- v-for vai exatamente na taga a ser renderizada -->
+        <!-- da pra usar as propriedades na tag de abertura usando o v-bind ou apenas : -->
+        <!-- Don’t use non-primitive values like objects and arrays as v-for keys. Use string or numeric values instead. -->
+        <li v-for='(cor, index) in cores' :teste='cor' :key="cor">{{ cor }} : {{ index }}</li>
+    </ul>
+    <button @click="cores.push('branca')">Adicionar</button>
+    <hr>
+    <template v-for='(cor, index) in cores'>
+        <h1>{{ cor }}</h1>
+        <p>{{ index }}</p>
+    </template>
+    <hr>
+    <ul>
+        <li v-for='pessoa in pessoas'>
+            <div v-for='(valor, chave, indice) in pessoa'>
+                {{ valor }} - {{ chave }} : {{ indice }}
+            </div>
+        </li>
+    </ul>
+    <hr>
+    <span v-for="n in 10">{{ n }}</span>
+
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            cores: ['vermelho', 'amarelo', 'azul', 'verde'],
+            pessoas: [
+                {nome: 'Márcio', idade: 25, peso: 92},
+                {nome: 'Joelma', idade: 46, peso: 66},
+                {nome: 'Márcio', idade: 25, peso: 92},
+                {nome: 'Victor', idade: 17, peso: 56}
+            ]
+        }
+    })
+</script>

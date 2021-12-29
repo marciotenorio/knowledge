@@ -1,0 +1,29 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    
+<div id="app">
+    <p> {{ titulo }}</p>
+    <p> {{ saudacao() }} </p>   <!-- Vue call anything about code in {{}}
+                                    anything inside this are convert to string
+                                    so you don't have pass functions here -->
+</div>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            titulo: 'My first use!!!!!!!'
+        },
+        methods:{ //treat about events
+            saudacao(){
+                console.log(this)
+                return this.titulo; //Use 'this' to acess properties, other functions in 
+                                    //methods object
+                                    //Don't put the same name for a function and propertie(field of data)
+                                    //because the instance of Vue put them in the root of instance, in the
+                                    //same context 
+            }
+        }
+    })
+</script>

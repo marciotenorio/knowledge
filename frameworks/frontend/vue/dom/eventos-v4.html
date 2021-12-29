@@ -1,0 +1,42 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    
+<div id="app">
+    <p> {{ count }}</p>
+    <button v-on:click='plusSomething(5, $event)' >Somar</button>
+                                        <!-- way to put some parameter and get the event 
+                                            Remember that event is put on parameter if that
+                                            has one parameter-->
+    <p v-on:mousemove="trackingMouse">
+        Localização do mouse: ({{ x }}, {{ y }}) 
+        <span v-on:mousemove.stop>Parar aqui!!!</span> <!-- event modifier 'stop' -->
+        <a v-on:click.prevent="dontSurface($event)" href="http://google.com.br">Google</a>
+</div>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            count: 0,
+            x: 0,
+            y: 0
+        },
+        methods: {
+            plusSomething(offset, event){
+                this.count += offset;
+            },
+            trackingMouse(event){
+                this.x = event.clientX
+                this.y = event.clientY
+            },
+            stop(event){
+                event.stopPropagation();
+            },
+            dontSurface(event){
+                console.log(event)
+                event.preventDefault();
+            }
+        }
+    })
+</script>

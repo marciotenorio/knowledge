@@ -1,0 +1,58 @@
+<script src="https://unpkg.com/vue"></script>
+
+<style>
+    #app {
+        display: flex;
+        justify-content: space-around;
+    }
+
+    .demo {
+        width: 100px;
+        height: 100px;
+        background-color: gray;
+    }
+
+    .c-1 {
+        background-color: red;
+    }
+
+    .c2 {
+        background-color: green;
+    }
+
+    .c3 {
+        background-color: yellow;
+    }
+
+
+
+</style>
+
+<div id="app">
+    <div class="demo" :class="estilo1" @click="applyC1 = !applyC1"></div>
+    <div class="demo"></div>
+    <div class="demo"
+        :class="[classeCSS]"></div> 
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            applyC1: false
+        },
+        computed: {
+            estilo1(){
+                return {
+                    'c-1': this.applyC1,
+                    c2: !this.applyC1
+                }
+            },
+            classeCSS () {
+                return {
+                    c3: true
+                }
+            }
+        }
+    })
+</script>

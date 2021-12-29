@@ -1,0 +1,23 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    
+<div id="app">
+    <p> {{ count }}</p>
+    <button v-on:click='plusOne' >Somar 1</button>
+    <!-- Da pra usar o @click como shorthand -->
+</div>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            count: 0
+        },
+        methods: {
+            plusOne(){
+                this.count++
+            }
+        }
+    })
+</script>

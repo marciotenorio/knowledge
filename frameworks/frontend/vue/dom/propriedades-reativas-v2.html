@@ -1,0 +1,56 @@
+<script src="https://unpkg.com/vue"></script>
+
+    
+<div id="app">
+    <button v-on:click="increase">Aumentar</button>
+    <button v-on:click="count2+=2">Aumentar 2</button>
+    <button v-on:click="decrease">Diminuir</button>
+    <p>Contador: {{ count }} | {{ count2 }} || {{ something() }}</p>
+    <!-- <p>Resultado: {{ result() }}</p>  -->
+    <!-- Always that you want call a function that belongs to 'methods' you need put '()'
+        if the function belongs to computed you don't need do this, basically computed are knowed as 
+        computed property because them behavior like -->
+    <p>Resultado: {{ result }}</p> 
+    <!-- how now result are computed, this only is executed when are called, having the 
+    behavior that don't be re-evaluated like methods, he is re-evaluated always the values that he depend changes,
+    knowed reactivity -->
+
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            count: 0,
+            count2: 0,
+            names: ["Bob", "Billy", "Mary", "Jane"]
+        },
+        // methods accept params in functions, her are only evaluated when is explicty called (using '()')
+        //and are re evaluted every time it's called
+        methods: {
+            increase(){
+                this.count++;
+            },
+            decrease(){
+                this.count--;
+            },
+            something(){
+                return 1;
+            }
+            // result(){
+            //     console.log('result in method are called')
+            //     return this.count >= 5 ? 'Maior ou igual a 5' : 'Menor que 5';
+            // }
+        },
+        // computed don't accept params in functions, her only works manipulating data property
+        //and are cacheable, to avoid repetitively calculating a value that doesn't need to be
+        // re-calculated when it hasn't changed 
+        // To every situatation that don't will behavior like property or transform a property can use methods
+        computed: {
+            result(){
+                console.log('result in method are called')
+                return this.count >= 5 ? 'Maior ou igual a 5' : 'Menor que 5';
+            }
+        }
+    })
+</script>

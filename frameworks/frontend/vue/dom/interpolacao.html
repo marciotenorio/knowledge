@@ -1,0 +1,29 @@
+<script src="https://cdn.jsdelivr.net/npm/vue@2/dist/vue.js"></script>
+
+    
+<div id="app">
+    <p> {{ count }}</p>
+    <p> {{ count > 10 ? 'Maior do que 10' : 'Menor do que 10' }}</p>
+    <p> {{ 'so nao pode for, funcoes, etc ele nao consegue interpolar' }}</p>
+    <button v-on:click='plusSomething' >Somar</button>
+                                        <!-- way to put some parameter and get the event 
+                                            Remember that event is put on parameter if that
+                                            has one parameter-->
+
+                                                
+</div>
+
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            count: 0
+        },
+        methods: {
+            plusSomething(event){
+                this.count++;
+            }
+        }
+    })
+</script>

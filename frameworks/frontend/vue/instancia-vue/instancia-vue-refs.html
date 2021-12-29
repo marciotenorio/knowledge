@@ -1,0 +1,45 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <h1 ref="aulaRef">{{ aula }}</h1>
+    <h2>{{ modulo }}</h2>
+    <button @click="alterarAula">Alterar Aula</button>
+    <button @click="alterarModulo">Alterar Módulo</button>
+</div>
+
+<!-- this.$refs uma referencia direta pro elemento html -->
+https://vuejs.org/v2/api/#ref
+
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            aula: 'Aula: Usando Refs',
+            modulo: 'Módulo: Instância Vue'
+        },
+        methods: {
+            alterarAula() {
+                this.aula += '#'
+            },
+            alterarModulo() {
+                this.modulo += '#'
+                console.log(this.$ref.aulaRef.innerText)
+            }
+        }
+    })
+
+    vm.$refs.aulaRef.innerText = 'Alterado diretamente :('
+</script>
+
+
+<!-- ref is used to register a reference to an element or a child component. 
+The reference will be registered under the parent component’s $refs object. 
+If used on a plain DOM element, the reference will be that element; 
+ used on a child component, the reference will be component instance: -->
+
+<!-- vm.$refs.p will be the DOM node -->
+<!-- <p ref="p">hello</p> -->
+
+<!-- vm.$refs.child will be the child component instance -->
+<!-- <child-component ref="child"></child-component> --> 

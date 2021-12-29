@@ -1,0 +1,26 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    <ul>
+        <!-- v-for vai exatamente na tag a ser renderizada -->
+        <!-- da pra usar as propriedades na tag de abertura usando o v-bind ou apenas : -->
+        <li v-for='cor of cores' :teste='cor'>{{ cor }}</li>
+    </ul>
+
+</div>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            cores: ['vermelho', 'amarelo', 'azul', 'verde'],
+            pessoas: [
+                {nome: 'Márcio', idade: 25, peso: 92},
+                {nome: 'Joelma', idade: 46, peso: 66},
+                {nome: 'Márcio', idade: 25, peso: 92},
+                {nome: 'Victor', idade: 17, peso: 56}
+            ]
+        }
+    })
+</script>

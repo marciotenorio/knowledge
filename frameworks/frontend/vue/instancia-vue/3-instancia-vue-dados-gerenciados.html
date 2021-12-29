@@ -1,0 +1,26 @@
+<meta charset="UTF-8">
+<script src="https://unpkg.com/vue"></script>
+
+<div id="app">
+    {{ titulo }} {{ novaInfo }}
+    <!-- Don't have reactivity (made by getters, setters and observer pattern ), proxy, etc -->
+    <button @click="alterar">Alterar</button>
+</div>
+
+
+<script>
+    const vm = new Vue({
+        el: '#app',
+        data: {
+            titulo: 'Teste 1'
+        },
+        methods: {
+            alterar() {
+                this.titulo += '!'
+            }
+        }
+    })
+
+    vm.novaInfo = 'Teste'
+    console.log(vm.novaInfo)
+</script>
