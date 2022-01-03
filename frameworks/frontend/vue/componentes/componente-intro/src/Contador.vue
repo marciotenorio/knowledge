@@ -3,6 +3,10 @@
         <span>{{ contador }}</span>
         <button @click="adicionar">+</button>
         <button @click="subtrair">-</button>
+        <!-- With scoped CSS when we have conflict like in Contadores/Contador
+        the container in conflict have the style of your parent and the elements of
+        your own component have the style defined inside them -->
+        <div>Test</div>
     </div>
 </template>
 
@@ -31,7 +35,7 @@ export default {
         padding: 5px 25px;
     }
 
-    button[data-v-6cbbf471] {
+    button {
         height: 30px;
         width: 30px;
         border-radius: 15px;
@@ -39,5 +43,9 @@ export default {
         color: #fff;
         margin-left: 10px;
         outline: none;
+    }
+
+    div {
+        border: 1px solid green;
     }
 </style>

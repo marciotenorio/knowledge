@@ -4,6 +4,8 @@
         <p>Edite as informações</p>
         <p>Idade do Usuário: <strong>{{ idade }}</strong></p>
         <button @click="alterarIdade">Alterar Idade</button>
+        <!-- Poderia passar changeAge aqui que iria funcionar -->
+        <!-- Poderia emitir um evento e caputa-lo em Usuario -->
     </div>
 </template>
 
@@ -11,11 +13,15 @@
 import barramento from '@/barramento'
 
 export default {
-    props: ['idade'],
+    props: ['idade', 'changeAge'],
     methods: {
         alterarIdade() {
+            // Da ruim por que você está mudando uma prop diretamente e como no Vue 2
+            // elas são one-way bind o pai pode não ser notificado
+            // usar sempre $emit ou callback passado numa props
             this.idade += 1
             barramento.alterarIdade(this.idade)
+
         }
     }
 }

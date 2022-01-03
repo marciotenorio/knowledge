@@ -31,12 +31,25 @@ export default {
         }
     },
     methods: {
+        // Comunicação entre irmãos pode ser feita emitindo um evento que muda algo no pai
+        // e então ele atualiza os filhos, ou seja, se comunica apartir do componente pai
         alterarNome() {
             this.nome = 'Ana'
         },
         reiniciarNome() {
+            // Passando uma função callback para mudar o pai, mas ela é chamada no
+            // filho através de props
             this.nome = 'Pedro'
+        },
+        nomeMudou(event) {
+            // @nomeMudou="nomeMudou($event)" outra forma de chamar a funcao do evento
+            // la em cima
+            this.nome = event
         }
+        // changeAge() {
+        //      mudando idade por callback passado como props
+        //     this.idade = 24;
+        // }
     }
 }
 </script>

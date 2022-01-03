@@ -2,6 +2,8 @@
 	<div id="app">
 		<app-usuario />
 	</div>
+	<!-- In DOM the elements are case-insensitive
+	props são case-sensitive -->
 </template>
 
 <script>
