@@ -5,7 +5,9 @@
             <button @click="numero++">&gt;</button>
         </span>
         <Citacao>
+            <!-- Pode ter mais de um elemento para o mesmo slot nomeado -->
             <h1 slot="autor">{{ citacoes[indice].autor }}</h1>
+            <!-- Se não tiver slot nomeado vai para o default e pode ir mais de um elemento -->
             <p>{{ citacoes[indice].texto }}</p>
             <h6 slot="fonte">{{ citacoes[indice].fonte }}</h6>
         </Citacao>
@@ -41,21 +43,27 @@ export default {
         }
     },
     created() {
+        //eslint-disable-next-line
         console.log('created')
     },
     destroyed() {
+        //eslint-disable-next-line
         console.log('destroyed')
     },
     activated() {
+        // eslint-disable-next-line
         console.log('activated')
     },
     deactivated() {
+        // eslint-disable-next-line
         console.log('deactivated')
     }
 }
 </script>
 
 <style scoped>
+    /* Da pra aplicar estilo nos componentes passados no slot, se tiver estilo aqui e no component
+    vai haver conflito */
     .citacoes {
         display: flex;
         flex-direction: column;

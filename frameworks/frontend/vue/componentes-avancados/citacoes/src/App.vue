@@ -4,7 +4,12 @@
 			<button @click="componente = 'Citacoes'">Citações</button>
 			<button @click="componente = 'Sobre'">Sobre</button>
 		</span>
+		<!-- <Citacoes v-if="false" /> -->
 		<keep-alive>
+			<!-- Keep alive chama as funções de ciclo de vida
+			activated e deactivated. Sem o keep alive são as normais
+			created e destroyed
+			No caso com o keep alive é chamado pro componente e seus filhos as funções-->
 			<component :is="componente" />
 		</keep-alive>
 	</div>

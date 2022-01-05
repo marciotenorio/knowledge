@@ -13,6 +13,7 @@ export default {
 </script>
 
 <style scoped>
+    /* Da pra aplicar estilo em componentes recebidos no slot */
     .citacao {
         border: 1px solid #DDD;
         background-color: rgba(0, 0, 0, .1);
