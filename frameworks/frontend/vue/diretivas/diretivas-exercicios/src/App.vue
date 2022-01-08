@@ -5,6 +5,10 @@
 		<p v-text="'Usando diretiva <strong>v-html</strong>'"></p>
 		<p v-html="'Usando diretiva <strong>v-html</strong>'"></p>
 		<hr>
+		<!-- <p v-teste:argumento.mod1.mod2...="'valor'"></p> -->
+		<!-- Por exemplo -->
+		<!-- <p v-on:click.prevent="someMethod"></p> -->
+		<hr>
 		<p v-destaque:fundo.atrasar="'lightblue'">Usando diretiva personalizada</p>
 		<p v-destaque.atrasar="cor">Usando diretiva personalizada</p>
 		<hr>
@@ -16,6 +20,8 @@
 <script>
 export default {
 	components: {  },
+	// Registrando diretiva localmente
+	// Da pra trabalhar com import com a especificação da diretiva
 	directives: {
 		'destaque-local': {
 			bind(el, binding, vnode) {
@@ -45,6 +51,11 @@ export default {
 						aplicarCor(binding.value.cor1)
 					}
 				}, atraso)
+			}
+		},
+		'quando': {
+			bind(el, binding, vnode){
+				
 			}
 		}
 	},

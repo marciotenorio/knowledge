@@ -3,9 +3,11 @@ import App from './App.vue'
 
 Vue.config.productionTip = false
 
+// Registrando globalmente
 Vue.directive('destaque', {
 	bind(el, binding, vnode) {
 		// el.style.backgroundColor = 'lightgreen'
+		// el.style.backgroundColor = binding.value
 
 		let atraso = 0
 		if(binding.modifiers['atrasar']) atraso = 3000

@@ -13,10 +13,10 @@
 
 <script>
 export default {
+	quando: {
 	directives: {
-		quando: {
 			bind(el, binding) {
-				// el.onclick = function(e) {
+			// el.onclick = function(e) {
 				// 	binding.value()
 				// }
 
