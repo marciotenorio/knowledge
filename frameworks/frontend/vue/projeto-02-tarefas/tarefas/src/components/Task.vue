@@ -1,6 +1,8 @@
 <template>
     <div @click="$emit('taskStateChanged', task)"
         class="task" :class="stateClass">
+        <!-- .stop usado para não propagar o evento já que esse evento do span
+        pode invocar o evento da div também -->
         <span @click.stop="$emit('taskDeleted', task)" class="close">x</span>
         <p>{{ task.name }}</p>
     </div>

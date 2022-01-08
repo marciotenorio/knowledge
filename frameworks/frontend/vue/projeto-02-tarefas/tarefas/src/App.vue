@@ -29,6 +29,9 @@ export default {
 		}
 	},
 	watch: {
+		// Para ver mudanças profundas de estado, não ser apenas algo 'shallow'
+		// No caso do array so tava vendo adicionar, remover, etc. Ao mudar o peding ele não monitorava
+		// ai a necessidade de transformar taks em objeto e do deep: true com handler
 		tasks: {
 			deep: true,
 			handler() {

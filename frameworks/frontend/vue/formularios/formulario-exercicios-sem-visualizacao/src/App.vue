@@ -2,18 +2,15 @@
 	<div id="app">
 		<h1>Registrar Reclamação</h1>
 		<div class="conteudo">
-			<form v-if="!enviado" class="painel">
+			<div class="painel" v-if="!enviado">
 				<div class="cabecalho">Formulário</div>
 				<Rotulo nome="E-mail">
-					<!-- O lazy é para so atualizar o v-model quando sair/perder foco do input
-					e o trim para tirar espaços em branco no começo e no fim -->
 					<input type="text" v-model.lazy.trim="usuario.email">
 				</Rotulo>
 				<Rotulo nome="Senha">
 					<input type="password" v-model="usuario.senha">
 				</Rotulo>
 				<Rotulo nome="Idade">
-					<!-- number para retornar o dado como number, só converte se tiver um número válido/convertivel -->
 					<input type="number" v-model.number="usuario.idade">
 				</Rotulo>
 				<Rotulo nome="Mensagem">
@@ -22,7 +19,7 @@
 				<Rotulo nome="Características do Problema">
 					<span class="mr-4"><input type="checkbox" v-model="caracteristicas"
 						value="reproduzivel"> Reproduzível</span>
-					<span><input type="checkbox" v-model="caracteristicas" 
+					<span><input type="checkbox" v-model="caracteristicas"
 						value="intermitente"> Intermitente</span>
 				</Rotulo>
 				<Rotulo nome="Qual produto?">
@@ -32,26 +29,20 @@
 				</Rotulo>
 				<Rotulo nome="Prioridade">
 					<select v-model="prioridade">
-						<!-- Quando você não define um value o que esta preenchendo option é passado -->
-						<option v-for="prioridade in prioridades" 
-						:key="prioridade.codigo"
-						:value="prioridade.codigo"
-						:selected="prioridade.codigo === 2"
-						>
-							{{ prioridade.nome }}
-						</option>
+						<option v-for="prioridade in prioridades"
+							:value="prioridade.codigo"
+							:key="prioridade.codigo"
+							:selected="prioridade.codigo === 3">
+							{{ prioridade.codigo }} - {{ prioridade.nome }}</option>
 					</select>
 				</Rotulo>
 				<Rotulo nome="Primeira Reclamação?">
-					<!-- Componentes que trabalham com v-model é esperado que gerem eventos do tipo input -->
-					<!-- In the case of v-model, it tells Vue that we want to create a two-way data binding
-					between a value in our template and a value in our data properties -->
-					<Escolha v-model="escolha"/>
+					<Escolha v-model="escolha" />
 				</Rotulo>
 				<hr>
 				<button @click.prevent="enviar">Enviar</button>
-			</form>
-			<div v-else class="painel">
+			</div>
+			<div class="painel" v-else>
 				<div class="cabecalho">Resultado</div>
 				<Rotulo nome="E-mail">
 					<span>{{ usuario.email }}</span>
@@ -60,13 +51,12 @@
 					<span>{{ usuario.senha }}</span>
 				</Rotulo>
 				<Rotulo nome="Idade">
-					<span>{{ usuario.idade }} || {{ tipoIdade }}</span>
+					<span>{{ usuario.idade }} {{ tipoIdade }}</span>
 				</Rotulo>
 				<Rotulo nome="Mensagem">
-					<!-- Para mostrar as quebras de linhas e o espaço -->
 					<span style="white-space: pre;">{{ mensagem }}</span>
 				</Rotulo>
-				<Rotulo nome="Marque as Opções">
+				<Rotulo nome="Características do Problema">
 					<span>
 						<ul>
 							<li v-for="c in caracteristicas" :key="c">{{ c }}</li>
@@ -77,7 +67,7 @@
 					<span>{{ produto }}</span>
 				</Rotulo>
 				<Rotulo nome="Prioridade">
-					<span>{{ prioridade }}</span>
+					<span>{{ prioridade }} {{ tipoPrioridade }}</span>
 				</Rotulo>
 				<Rotulo nome="Primeira Reclamação?">
 					<span>{{ escolha }}</span>
@@ -94,34 +84,37 @@ import Escolha from './components/Escolha.vue'
 export default {
 	name: 'app',
 	components: { Rotulo, Escolha },
+	computed: {
+		tipoIdade() {
+			return typeof this.usuario.idade
+		},
+		tipoPrioridade() {
+			return typeof this.prioridade
+		},
+	},
+	methods: {
+		enviar() {
+			this.enviado = true
+		}
+	},
 	data() {
 		return {
 			mensagem: '',
+			caracteristicas: [],
 			produto: 'web',
 			prioridade: 1,
 			prioridades: [
-				{codigo: 1, nome: 'Baixa'},
-				{codigo: 2, nome: 'Moderada'},
-				{codigo: 3, nome: 'Alta'}
+				{ codigo: 1, nome: 'Baixa' },
+				{ codigo: 2, nome:  'Moderada' },
+				{ codigo: 3, nome: 'Alta' }
 			],
-			caracteristicas: [],
-			usuario: { 
+			usuario: {
 				email: '',
 				senha: '',
 				idade: 25
 			},
 			escolha: true,
 			enviado: false
-		}
-	},
-	computed: {
-		tipoIdade() {
-			return typeof this.usuario.idade;
-		}
-	},
-	methods: {
-		enviar() {
-			this.enviado = true;
 		}
 	}
 }
@@ -165,7 +158,7 @@ body {
 	font-size: 1.4rem;
 }
 
-#app form button {
+.painel button {
 	float: right;
 	margin: 10px 0px;
 	padding: 10px 20px;
