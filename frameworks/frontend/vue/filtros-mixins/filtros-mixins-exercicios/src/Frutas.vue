@@ -13,6 +13,7 @@ import frutasMixin from '@/frutasMixin'
 import usuarioMixin from './usuarioMixin'
 
 export default {
+    // Se tiver conflito no que no mixin e componente ele vai usar as coisas do
     mixins: [frutasMixin, usuarioMixin],
 	created() {
         console.log('Created - Frutas.vue!')

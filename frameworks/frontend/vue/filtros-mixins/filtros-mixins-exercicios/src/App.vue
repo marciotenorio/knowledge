@@ -4,6 +4,7 @@
 		<hr>
 		<p>{{ usuarioLogado }}</p>
 		<p>{{ cpfDoAluno | cpf | inverter }}</p>
+		<!-- usar o filter com v-bind -->
 		<input type="text" :value="cpfDoAluno | cpf | inverter">
 		<hr>
 		<Frutas />
@@ -24,6 +25,9 @@ import Frutas from './Frutas.vue'
 
 export default {
 	components: { Frutas },
+	// Se você usar um metodo de ciclo de vida no mixin ele vai rodar o do mixin e do componente
+	// vale pro global e local
+	// 1º mixin global, 2º mixin depois do proprio componente
 	mixins: [frutasMixin, usuarioMixin],
 	filters: {
 		cpf(valor) {
@@ -37,6 +41,7 @@ export default {
 	data() {
 		return {
 			cpfDoAluno: '60070080090',
+			// preferencia do array frutas do componente e nao do mixin
 			frutas: ['abacate']
 		}
 	},
