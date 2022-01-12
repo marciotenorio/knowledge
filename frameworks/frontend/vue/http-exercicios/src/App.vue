@@ -3,7 +3,9 @@
 		<h1>HTTP com Axios</h1>
 		<b-alert show dismissible v-for="mensagem in mensagens"
 			:key="mensagem.texto"
-			:variant="mensagem.tipo">{{ mensagem.texto }}</b-alert>
+			:variant="mensagem.tipo">
+			{{ mensagem.texto }}
+		</b-alert>
 		<b-card>
 			<b-form-group label="Nome:">
 				<b-form-input type="text" size="lg"
@@ -38,6 +40,8 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
 	data() {
 		return {
@@ -76,7 +80,7 @@ export default {
 			const metodo = this.id ? 'patch' : 'post'
 			const finalUrl = this.id ? `/${this.id}.json` : '.json'
 			this.$http[metodo](`/usuarios${finalUrl}`, this.usuario)
-				.then(_ => {
+				.then(() => {
 					this.limpar()
 					this.mensagens.push({
 						texto: 'Operação realizada com sucesso!',
@@ -89,8 +93,12 @@ export default {
 				this.usuarios = res.data
 				console.log(res.data)
 			})
+			// axios.get('https://curso-vue-8bcfc-default-rtdb.firebaseio.com/usuarios.json').then(res => {
+			// 	this.usuarios = res.data
+			// 	console.log(res.data)
+			// })
 		}
-	}
+	},
 	// created() {
 	// 	this.$http.post('usuarios.json', {
 	// 		nome: 'Maria',

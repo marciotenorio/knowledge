@@ -1,15 +1,17 @@
 import Vue from 'vue'
 import axios from 'axios'
 
-// axios.defaults.baseURL = 'https://curso-vue-e7de3.firebaseio.com/'
+// Da para adicionar headers, interceptors, etc em outros lugares da aplicação com essa estrategia
+// axios.defaults.baseURL = 'https://curso-vue-8bcfc-default-rtdb.firebaseio.com/'
 // axios.defaults.headers.common['Authorization'] = 'abc123'
 // axios.defaults.headers.get['Accepts'] = 'application/json'
 
 Vue.use({
+    // Da para criar várias instancias do axios para propositos especificos
     install(Vue) {
         // Vue.prototype.$http = axios
         Vue.prototype.$http = axios.create({
-            baseURL: 'https://curso-vue-e7de3.firebaseio.com/',
+            baseURL: 'https://curso-vue-8bcfc-default-rtdb.firebaseio.com/',
             headers: {
                 "Authorization": "abc123"
             }
