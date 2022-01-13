@@ -4,6 +4,7 @@
         <hr>
         <!-- Onde as rotas aninhadas seram carregadas -->
         <router-view />
+        <!-- <router-view name="oneMoreMenu"></router-view> -->
         <button sucesso @click="irParaInicio">Voltar</button>
     </div>
 </template>
@@ -13,8 +14,8 @@ export default {
     methods: {
         irParaInicio() {
             // this.$router.push('/')
-            this.$router.push({ path: '/' })
-            // this.$router.push({ name: 'inicio' })
+            // this.$router.push({ path: '/' })
+            this.$router.push({ name: 'inicio' })
         }
     },
 }

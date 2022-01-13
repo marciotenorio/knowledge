@@ -4,7 +4,7 @@
             <router-link to="/" tag="li" active-class="active" exact>
                 <a>Início</a></router-link>
             <router-link to="/usuario" tag="li" active-class="active" exact>
-                <a>Usuário 1</a></router-link>
+                <a>Usuário</a></router-link>
         </ul>
     </nav>
 </template>
