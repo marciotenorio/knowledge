@@ -17,7 +17,9 @@
 
 <script>
 export default {
-
+    beforeDestroy(){
+        // console.log('antes de destruir usuario lista')
+    }
 }
 </script>
 

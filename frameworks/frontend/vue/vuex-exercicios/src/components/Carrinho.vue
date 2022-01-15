@@ -30,16 +30,16 @@ import { mapGetters } from 'vuex'
 
 export default {
     computed: {
-        ...mapGetters('carrinho', {
+        ...mapGetters('carrinho',{
             total: 'valorTotal'
         }),
         // total() {
-        //     return this.$store.getters.valorTotal
+        //     return this.$store.getters.valorTotal;
         // },
         produtos() {
-            return this.$store.state.carrinho.produtos
+            return this.$store.state.carrinho.produtos;
         }
-    }
+    },
 }
 </script>
 

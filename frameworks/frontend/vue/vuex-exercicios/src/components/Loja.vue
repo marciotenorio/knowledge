@@ -14,24 +14,40 @@
 import { mapActions } from 'vuex'
 
 export default {
-    data() {
-        return {
-            sequencia: 1
-        }
-    },
     computed: {
         quantidade() {
-            return this.$store.state.parametros.quantidade
+            return this.$store.state.parametros.quantidade;
         },
         preco() {
-            return this.$store.state.parametros.preco
-        }
+            return this.$store.state.parametros.preco;
+        },
+        sequencia: {
+            get() {
+                return this.$store.state.parametros.sequencia;
+            },
+            set(valor) {
+                this.$store.commit('setSequencia', valor)
+            }
+        }        
     },
     methods: {
+        // Mesmas forma dos getters
+        // mapMutations vem sempre em methods
+        // ...mapMutations(['adicionarProduto']),
+
+        // Adicinou namespaced true e agora preciso chamar ele antes
+        // de passar a lista de actions
         ...mapActions('carrinho', ['adicionarProduto']),
+
+        // So funciona por que ta no raiz, dai nao preciso passar
+        // namespace 'carrinho' antes
+        // ...mapActions(['adicionarProduto']),
+
+        // mapActions faz isso
         // adicionarProduto(produto) {
-        //     this.$store.dispatch('adicionarProduto', produto, 123)
+        //     this.$store.dispatch('adicionarProduto', produto);
         // },
+
         adicionar() {
             const produto = {
                 id: this.sequencia,
@@ -40,13 +56,23 @@ export default {
                 preco: this.preco
             }
             this.sequencia++
-            
+            // eslint-disable-next-line
+            console.log(produto)
+
             // this.$store.state.produtos.push(produto)
+
+            // this.$commit chama a mutation passada no primeiro parâmetro
             // this.$store.commit('adicionarProduto', produto)
-            // this.$store.dispatch('adicionarProduto', produto)
+
+            // Atraves do mapMutations
+            // Atraves do mapActions
             this.adicionarProduto(produto)
 
+            // this.$store.dispatch('adicionarProduto', produto);
+
+            // eslint-disable-next-line
             console.log(this.$store.getters.getNome)
+            // eslint-disable-next-line
             console.log(this.$store.getters.getNomeCompleto)
         }
     }

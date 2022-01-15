@@ -1,14 +1,19 @@
 export default {
     state: {
-        quantidade: 2,
-        preco: 19.99
+        quantidade: 1,
+        preco: 9.99,
+        sequencia: 1
     },
+    // Tem como objetivo apenas alterar o estado centralizado
     mutations: {
-        setQuantidade(state, payload) {
-            state.quantidade = payload
+        setQuantidade(state, quantidade){
+            state.quantidade = quantidade;
         },
-        setPreco(state, payload) {
-            state.preco = payload
+        setPreco(state, preco){
+            state.preco = preco
+        },
+        setSequencia(state, valor) {
+            state.sequencia = valor;
         }
     }
 }

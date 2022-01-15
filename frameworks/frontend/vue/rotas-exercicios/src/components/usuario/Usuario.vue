@@ -18,6 +18,9 @@ export default {
             this.$router.push({ name: 'inicio' })
         }
     },
+    beforeDestroy() {
+        // console.log('antes de destruir usuario')
+    }
 }
 </script>
 

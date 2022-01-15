@@ -12,15 +12,20 @@
 import { mapGetters } from 'vuex'
 
 export default {
-    computed: mapGetters('carrinho', {
+    // getters ficam dentro de computed
+    computed: mapGetters('carrinho',{
+        // '' por que nesse contexto a variavel não existe
         total: 'valorTotal'
     })
+    // computed: {
+    //     ...mapGetters(['valorTotal'])
+    // }
     // computed: mapGetters(['valorTotal'])
     // computed: {
     //     total() {
-    //         return this.$store.getters.valorTotal
-    //     }
-    // }
+    //         return this.$store.getters.valorTotal;
+    //     }       
+    // },
 }
 </script>
 
