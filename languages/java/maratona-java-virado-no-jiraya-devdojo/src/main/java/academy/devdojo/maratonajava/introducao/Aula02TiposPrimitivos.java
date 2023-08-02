@@ -21,5 +21,9 @@ public class Aula02TiposPrimitivos {
         System.out.println("char "+caractere);
         System.out.println(numeroGrande);
         System.out.println("Oi meu nome é "+nome);
+
+        System.out.printf("%[flags][width][.precision]conversion-character");
+        //Internally, printf() uses the java.util.Formatter 
+        //https://www.baeldung.com/java-printstream-printf
     }
 }
