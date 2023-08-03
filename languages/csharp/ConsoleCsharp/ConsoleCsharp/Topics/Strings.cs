@@ -1,5 +1,4 @@
 ﻿using System.Text;
-using System.Xml.Linq;
 
 namespace ConsoleCsharp.Topics
 {
@@ -16,6 +15,7 @@ namespace ConsoleCsharp.Topics
 
             string str1 = @"Oi";
             string str2 = @"Oi";
+            // == funciona aqui, diferente do Java
             Console.WriteLine(str1.Equals(str2));
 
             //Raw strings. " quantity are based on necessity in the number of " together.

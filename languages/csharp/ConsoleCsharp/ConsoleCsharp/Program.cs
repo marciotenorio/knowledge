@@ -17,13 +17,17 @@ public class Program
 		bool e;
 		char f;
 
-		System.Int64 ka = 2, some = 3, someMore = 4;
+		//System.Int64 ka = 2, some = 3, someMore = 4;
 
-        Console.WriteLine($"The age is {a}");
-		Console.WriteLine($"Learning print floating points numbers: {b:0.###}");
-		FloatPointPrecisionPrint fp = new FloatPointPrecisionPrint();
-		Console.WriteLine(int.MinValue);
-		Strings strs = new Strings();
-		Bools bools = new Bools();
+  //      Console.WriteLine($"The age is {a}");
+		//Console.WriteLine($"Learning print floating points numbers: {b:0.###}");
+		//FloatPointPrecisionPrint fp = new FloatPointPrecisionPrint();
+		//Console.WriteLine(int.MinValue);
+		//Strings strs = new Strings();
+		//Bools bools = new Bools();
+
+        DefaultParameters defaultParameters = new DefaultParameters();
+        defaultParameters.DefaultParametersExample();
+
     }
 }
