@@ -17,8 +17,8 @@ public class Program
 		//DefaultParameters defaultParameters = new DefaultParameters();
 		//defaultParameters.DefaultParametersExample();
 		Arrays arrs = new Arrays();
-		int[] arr = {1,2,3, 4, 5};
-		arrs.myFunc(arr);
-		Console.WriteLine(arr[0]);
-    }
+		//int[] arr = {1,2,3, 4, 5};
+		//arrs.myFunc(arr);
+		//Console.WriteLine(arr[0]);
+	}
 }

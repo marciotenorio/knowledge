@@ -12,7 +12,7 @@
             var b1 = new[] { 1, 2, 3 };
             int[] b2 = { 1, 2, 3 };
 
-            //Ranges
+            /* ----- Ranges ------ */
             int[] scores = { 3, 2, 5, 4, 1 };
 
             Console.WriteLine("scores:");
@@ -33,6 +33,20 @@
             Console.WriteLine("scores[1..3]:");
             subScores = scores[1..(1+2)];
             PrintArray(subScores);
+
+            /* ----- Multidimensional Arrays ------ */
+            int[,] mult = new int[2, 2]
+            {
+                {1,1 },
+                {2,2},
+            };
+
+            int[,,] tensor =
+            {
+                { { 1, 2, 3 }, { 4, 5, 6 } },
+                { { 7, 8, 9 }, { 10, 11, 12 } },
+            };
+            Console.WriteLine(tensor[0,1,1] + $"getLengh: {tensor.GetLongLength(0)}");
         }
 
         public void myFunc(int[] arr)
