@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Anatomia CSS</title>
+    <style>
+        /* Seletor é case sensitive, ao contrário da escrita das tags HTML. 
+            Logo .selector != .Selector e .div == .dIV */
+        .selector {
+            color: rgb(175, 104, 22);
+            font-size: 2rem;
+            text-align: center;
+            /* Multiple values and shorthand property*/
+            border: solid 5px navy;
+            /* Alternatives */
+            font-family: Arial, Helvetica, sans-serif;
+            /* Remove 500px from 100% (final width) */
+            width: calc(100% - 500px); 
+            background-color: rgb(35, 153, 189);
+        }
+
+        /* Using pseudo-class */
+        .selector:hover {   
+            background-color: orange;
+        }
+
+        /* Using pseudo-element */
+        .selector::first-letter {
+            font-size: 4rem;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="selector">Conteúdo</div>
+</body>
+
+</html>
