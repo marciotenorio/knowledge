@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>Origem CSS: Externo, Interno e Inline</title>
+    <style>
+        body {
+            background-color: aquamarine;
+        }
+    </style>
+    <!-- Se o style estivesse acima dessa tag style, ele não seria aplicado
+        por causa da precedência de o aquamarine vir depois.
+        OBS: O último processado (css) tem a preferência -->
+    <link rel="stylesheet" href="css/externo.css">
+</head>
+
+<!-- CSS de maior precedência -->
+<body style="background-color: coral;">
+    <h1>E agora?</h1>
+</body>
+
+</html>
