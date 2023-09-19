@@ -2,6 +2,7 @@
 {
     public class Arrays
     {
+        public int Teste {get; set;}
         public Arrays()
         {
             //1. Array are passed as reference, not by value

@@ -8,6 +8,7 @@ lerna-debug.log*
 
 # Visual Studio
 /**/*.vs/**
+/**/*.vscode/**
 /**/*bin/**
 /**/*obj/**
 
@@ -111,6 +112,14 @@ dist
 
 # JAVA
 
+#Eclipse
+.project
+.classpath
+/**/*target/**
+
+#Intellij
+*.iml
+
 # Compiled class file
 *.class
 
@@ -139,3 +148,6 @@ dist
 hs_err_pid*
 /target/
 /bin/
+
+#General
+*.DS_Store

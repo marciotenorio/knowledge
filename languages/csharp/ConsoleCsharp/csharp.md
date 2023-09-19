@@ -1,0 +1,1 @@
+[init](./ConsoleCsharp/Basics/Arrays.cs)
