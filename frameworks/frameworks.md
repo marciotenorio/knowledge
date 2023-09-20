@@ -3,6 +3,7 @@
 # Summary
 
 - [. . /Home](../README.md)
+- [Angular](./angular/)
 - [Spring](./spring-learning/README.md)
   - [Bean Validation](./spring-learning/src/main/java/br/marcio/springlearning/model/Anime.java)
 - [Vue](./vue/README.md)
