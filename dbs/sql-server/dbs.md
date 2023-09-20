@@ -4,4 +4,5 @@ Some tricks, annotations, guides, snippets and other things that helpe-me to imp
 
 # Summary
 
+- [. . /Home](../../README.md)
 - [MSSQL Server](./sql-server.md)

@@ -2,6 +2,7 @@
 
 # Summary
 
+- [. . /Home](../README.md)
 - [Algorithms (Java)](#)
   - [Search](#)
     - [Binary Search](./algo/src/main/java/br/tenorio/algo/BinarySearch.java) 
