@@ -5,31 +5,39 @@ import java.util.Stack;
 
 public class Main {
     public static void main(String[] args) {
-        String test = "(])";
-        System.out.println(isValid(test));
+        ListNode l3 = new ListNode(4, null);
+        ListNode l2 = new ListNode(2, l3);
+        ListNode l1 = new ListNode(1, l2);
+
+        ListNode l6 = new ListNode(4, null);
+        ListNode l5 = new ListNode(3, l6);
+        ListNode l4 = new ListNode(1, l5);
+
+        var call = new Main();
+
+        var result = call.mergeTwoLists(l1, l4);
+        while(result != null) {
+            System.out.println(result.val);
+            result = result.next;
+        }
     }
 
-    public static boolean isValid(String s) {
-        Stack<Character> stack = new Stack<>();
-        HashMap<Character, Character> brackets = Map.of('(', ')', '[', ']', '{', '}');
+    // Input: list1 = [1,2<,4], list2 = [1,3<,4]
+    // Output: [1,1,2,3,4,4]
+    // 
 
-        for(int i=0; i<s.length(); i++){
-            if(brackets.get(brackets))
-
-            if(openBrackets.contains(s.charAt(i))){
-                stack.push(s.charAt(i));
+    public ListNode mergeTwoLists(ListNode list1, ListNode list2) {
+        if (list1 != null && list2 != null) {
+            if (list1.val < list2.val) {
+                list1.next = mergeTwoLists(list1.next, list2);
+                return list1;
+            } else {
+                list2.next = mergeTwoLists(list1, list2.next);
+                return list2;
             }
-            if(closeBrackets.contains(s.charAt(i))){
-                if(stack.empty()) return false;
-
-                Character current = stack.peek();
-
-                if(current == '(' && s.charAt(i) == ')') stack.pop();
-                else if(current == '[' && s.charAt(i) == ']') stack.pop();
-                else if(current == '{' && s.charAt(i) == '}') stack.pop();                
-                else return false;
-            }                        
-        }        
-        return stack.empty();
+        }
+        if (list1 == null)
+            return list2;
+        return list1;
     }
 }
