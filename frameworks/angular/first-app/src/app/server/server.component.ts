@@ -5,7 +5,12 @@ import { Component, OnInit } from '@angular/core';
      * Should have unique selector name
      */
     selector: 'app-server',
-    templateUrl: 'server.component.html'
+    templateUrl: 'server.component.html',
+    styles: [`
+        .online {
+            color: rgb(30, 184, 81);
+        }
+    `]
 })
 
 export class ServerComponent implements OnInit {
@@ -16,7 +21,13 @@ export class ServerComponent implements OnInit {
         return this.serverStatus;
     }
 
-    constructor() { }
+    getColor(){
+        return this.serverStatus == 'online' ? 'green' : 'gray';
+    }
+
+    constructor() {
+        this.serverStatus = Math.random() > 0.5 ? 'online' : 'offline';
+     }
 
     ngOnInit() { }
 }
