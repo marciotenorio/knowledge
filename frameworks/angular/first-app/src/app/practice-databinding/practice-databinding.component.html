@@ -1,0 +1,16 @@
+<div class="form-group">
+    <label for="usernameInput" class="form-label">Username</label>
+    <input type="text" 
+        id="usernameInput" 
+        class="form-control" 
+        placeholder="Username" 
+        aria-describedby="Username"
+        [(ngModel)]="username"
+    >
+    <small id="helpId" class="text-muted">{{username}}</small>
+    <hr>
+    <button type="button" class="btn btn-primary"
+        [disabled]="checkUsername()"
+        (click)="username = ''"
+    >Button</button>
+</div>
