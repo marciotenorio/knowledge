@@ -11,3 +11,4 @@
 - [List Patterns](./ConsoleCsharp/Basics/ListPatterns.cs)
 - [in Keyword](./ConsoleCsharp/Basics/InKeyword.cs)
 - [Interface IDisposable](./ConsoleCsharp/Basics/IDisposableImpl.cs)
+- [Delegate](./ConsoleCsharp/Basics/DelegateEx.cs)
