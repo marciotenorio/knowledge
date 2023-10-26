@@ -1,26 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="preload" href="style.css">
-    <title>HTML Home =)</title>
+    <title>Exercícios HTML</title>
 </head>
 <body>
+    <header>
+        <h1>Exercícios HTML</h1>
+    </header>
     <nav>
-        <ul>
-            <li><a href="https://ge.globo.com/rj/futebol/copa-do-brasil/jogo/17-09-2023/flamengo-sao-paulo.ghtml">G1</a></li>
-            <li><a href="http://facebook.com">Face</a></li>
-            <li><a href="http://twitter.com" my-attr>Twitter</a></li>
-            <!-- To get all tags with my-attr i can run: document.querySelector('[my-attr]') -->
-        </ul>
+        <a href="exercicios/1-test.html">00 - Teste</a>
     </nav>
-    
+    <section id="conteudo"></section>
+    <footer>
+        <br>
+        Curso HTML - Web Moderno
+    </footer>
+
+    <script>
+        // document.querySelectorAll('[some-attr]').forEach(link => {
+        document.querySelectorAll('a').forEach(link => {
+            const content = document.getElementById('conteudo')
+            link.onclick = (e) => {
+                e.preventDefault();
+
+                // fetch(link.getAttribute('[some-attr]'))
+                fetch(link.href)
+                    .then(res => res.text())
+                    .then(html => content.innerHTML = html)
+            }
+        })
+    </script>
 </body>
 </html>
-
-<style>
-    ul>li {
-        display: inline;
-    }
-</style>
