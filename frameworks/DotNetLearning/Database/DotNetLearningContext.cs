@@ -16,7 +16,7 @@ public class DotNetLearningContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseNpgsql(_configuration.GetConnectionString("db"));
+        optionsBuilder.UseSqlite(_configuration.GetConnectionString("db"));
     }
 
     public DbSet<Course> Courses { get; set; } = null!;

@@ -11,17 +11,17 @@ namespace DotNetLearning.Controllers;
 [Route("[controller]")]
 public class UniversityController : ControllerBase
 {
-    public DotNetLearningContext _Context { get; set; }
+    public DotNetLearningContext _context { get; set; }
 
     public UniversityController(DotNetLearningContext context)
     {
-        _Context = context;
+        _context = context;
     }
 
     [HttpGet("students")]
     public async Task<ActionResult<IEnumerable<Student>>> GetAllStudents()
     {
-        return await _Context.Students
+        return await _context.Students
             .ToListAsync();
     }
     
@@ -35,8 +35,8 @@ public class UniversityController : ControllerBase
     [Produces("application/json")]
     public async Task<ActionResult<Student>> SaveStudent(Student student)
     {
-        _Context.Students.Add(student);
-        await _Context.SaveChangesAsync();
+        _context.Students.Add(student);
+        await _context.SaveChangesAsync();
         return CreatedAtAction(
             actionName: nameof(GetAllStudents),
             routeValues: new Student()

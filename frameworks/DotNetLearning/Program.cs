@@ -25,7 +25,7 @@ builder.Services.AddSwaggerGen(options =>
 });
 builder.Services.AddDbContext<DotNetLearningContext>(options =>
 {
-    options.UseNpgsql("dotnet-learning-db");
+    options.UseSqlite("db");
 });
 
 var app = builder.Build();
