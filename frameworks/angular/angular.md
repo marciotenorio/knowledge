@@ -36,7 +36,7 @@ It's only possible to use ``[(ngModel)]="name"`` if the ``import {FormsModule} f
 - Modules in Angular are containers for cohesive code blocks to an application domain, workflow, or closed related capabilities. 
 - Selectors are used as the custom element name. 
 - All components must have a template. It can be a ``templateUrl`` in ``@Component`` pointing to an external file or a ``template`` that is a html directly in the property.
-- A component can have multiple external css files, inline styles have high precedence and you can use multiples strings to define css. Css is only applied to elements belonging to the component.
+- A component can have multiple external css files, inline styles (inside component.ts) have high precedence and you can use multiples strings to define css. Css is only applied to elements belonging to the component.
 - Can i have selector that acts like a custom element, a property, or class like [here](first-app/src/app/servers/servers.component.ts).
 
 ## Data Binding
