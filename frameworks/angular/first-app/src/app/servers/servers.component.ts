@@ -14,7 +14,7 @@ import { Component } from '@angular/core';
    */
   // styleUrls: ['./servers.component.css']
   /**
-   * Inline styles like template above
+   * Inline styles like template below
    */
   // styles: [`
   //     h3 {

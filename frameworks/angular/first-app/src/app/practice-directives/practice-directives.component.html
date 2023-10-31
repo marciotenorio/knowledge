@@ -8,4 +8,5 @@
     <li *ngFor="let item of clicks;index as idx" 
         [ngStyle]="{backgroundColor: idx >= 4 ? 'blue' : 'transparent' }"
         [ngClass]="{log: idx >= 4 }">{{ item }} : {{ idx }}</li>
+        <!-- 'log' is a css class that is conditionally applied -->
 </ol>
