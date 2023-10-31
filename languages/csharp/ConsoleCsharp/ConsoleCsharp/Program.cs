@@ -23,6 +23,7 @@ public class Program
 		// Arrays arrs = default;
 		// System.Console.WriteLine("Oi");
 
-		DelegateEx delegateEx = new DelegateEx();
+		// DelegateEx delegateEx = new DelegateEx();
+		AnonymousMethod anonymousMethod = new AnonymousMethod();
 	}
 }
