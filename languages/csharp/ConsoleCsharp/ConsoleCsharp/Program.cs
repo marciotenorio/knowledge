@@ -24,6 +24,8 @@ public class Program
 		// System.Console.WriteLine("Oi");
 
 		// DelegateEx delegateEx = new DelegateEx();
-		AnonymousMethod anonymousMethod = new AnonymousMethod();
+		// AnonymousMethod anonymousMethod = new AnonymousMethod();
+		LambdaExpression le = new LambdaExpression();
+
 	}
 }
