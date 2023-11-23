@@ -39,6 +39,26 @@ It's only possible to use ``[(ngModel)]="name"`` if the ``import {FormsModule} f
 - A component can have multiple external css files, inline styles (inside component.ts) have high precedence and you can use multiples strings to define css. Css is only applied to elements belonging to the component.
 - Can i have selector that acts like a custom element, a property, or class like [here](first-app/src/app/servers/servers.component.ts).
 
+### Receiving Data
+
+You can create custom properties in your component that can be received from outside, like a ``parent -> child`` sending data. [Here's a example](./cmp-databinding-start/src/app/server-element/server-element.component.ts):
+```ts
+//Your component
+export class ServerElementComponent implements OnInit {
+  @Input('srvElement') element: {type: string, name: string, content: string}
+}
+```
+Your component define a custom property called ``element``, which outside from component are called ``srvElement`` and can send to child using property [binding like this](./cmp-databinding-start/src/app/app.component.html):
+```html
+<div class="col-xs-12">
+  <app-server-element 
+    *ngFor="let item of serverElements"
+    [srvElement]="item"
+  ></app-server-element>
+</div>
+``` 
+
+
 ## Data Binding
 - Binding possibilities:
   - TS -> TEMPLATE: String interpolation ``{{ data }}`` or property binding ``[property] = "data"``. One-way. 
