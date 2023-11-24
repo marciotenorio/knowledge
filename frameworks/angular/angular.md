@@ -57,6 +57,34 @@ Your component define a custom property called ``element``, which outside from c
   ></app-server-element>
 </div>
 ``` 
+### Sending Data
+
+You can create custom properties in your component that can send data to outside, like a ``parent <- child``. [Here's a example](./cmp-databinding-start/src/app/cockpit/cockpit.component.ts):
+
+```ts
+export class CockpitComponent implements OnInit {
+  @Output() serverCreated = new EventEmitter<{serverName: string, serverContent: string}>();
+  @Output('bpCreated') blueprintCreated = new EventEmitter<{serverName: string, serverContent: string}>();
+```
+Your component creates custom properties called ``serverCreated`` and ``blueprintCreated``, and the second one has an alias called ``bpCreated`` which is your name outside the custom element/component. Both have ``EventEmitter<>`` type, which in the diamond carries the type of data he will send. 
+
+To send the date to the parent custom element/component you can do this:
+```ts
+  onAddServer() {
+    this.serverCreated.emit({serverName: this.newServerName, serverContent: this.newServerContent});
+  }
+```
+
+You can listen to those event emitters [like this](./cmp-databinding-start/src/app/app.component.html):
+
+```html
+<div class="container">
+  <app-cockpit 
+    (serverCreated)="onServerAdded($event)"
+    (bpCreated)="onBlueprintAdded($event)"
+  ></app-cockpit>
+</div>
+```
 
 
 ## Data Binding
