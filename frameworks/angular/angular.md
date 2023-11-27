@@ -43,12 +43,12 @@ It's only possible to use ``[(ngModel)]="name"`` if the ``import {FormsModule} f
 
 You can create custom properties in your component that can be received from outside, like a ``parent -> child`` sending data. [Here's a example](./cmp-databinding-start/src/app/server-element/server-element.component.ts):
 ```ts
-//Your component
+//Child component
 export class ServerElementComponent implements OnInit {
   @Input('srvElement') element: {type: string, name: string, content: string}
 }
 ```
-Your component define a custom property called ``element``, which outside from component are called ``srvElement`` and can send to child using property [binding like this](./cmp-databinding-start/src/app/app.component.html):
+Your child component ``ServerElementComponent`` define a custom property called ``element``, which outside from component are called ``srvElement`` and can receive data using property [binding like this](./cmp-databinding-start/src/app/app.component.html):
 ```html
 <div class="col-xs-12">
   <app-server-element 
@@ -62,6 +62,7 @@ Your component define a custom property called ``element``, which outside from c
 You can create custom properties in your component that can send data to outside, like a ``parent <- child``. [Here's a example](./cmp-databinding-start/src/app/cockpit/cockpit.component.ts):
 
 ```ts
+//Child component
 export class CockpitComponent implements OnInit {
   @Output() serverCreated = new EventEmitter<{serverName: string, serverContent: string}>();
   @Output('bpCreated') blueprintCreated = new EventEmitter<{serverName: string, serverContent: string}>();
@@ -75,7 +76,7 @@ To send the date to the parent custom element/component you can do this:
   }
 ```
 
-You can listen to those event emitters [like this](./cmp-databinding-start/src/app/app.component.html):
+You can listen in a parent to those event emitters [like this](./cmp-databinding-start/src/app/app.component.html):
 
 ```html
 <div class="container">
