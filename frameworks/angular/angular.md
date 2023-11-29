@@ -115,6 +115,70 @@ You can listen in a parent to those event emitters [like this](./cmp-databinding
 </div>
 ```
 
+### Local Reference In Templates
+
+You can use ``#someNameToReference`` in any HTML element from your template. By doing this you achieve a way to reference the own element itself anywhere on your template, but not in Typescript code. Example of naming a local reference and using it as a parameter to an event on a button:
+```html
+<input 
+  type="text" 
+  class="form-control"
+  #serverNameInput> <!-- reference -->
+<label>Server Content</label>
+<input type="text" class="form-control" [(ngModel)]="newServerContent">
+<br>
+<button
+  class="btn btn-primary"
+  (click)="onAddServer(serverNameInput)">Add Server</button>
+```
+```ts
+onAddServer(nameInput: HTMLInputElement) {
+  this.serverCreated.emit({serverName: nameInput.value, serverContent: this.newServerContent});
+}
+```
+### ViewChild
+ViewChild in Angular is a tool that allows you to access template elements directly in the component. When using the ``@ViewChild()`` syntax, it is possible to pass the name of the local reference and the type of the desired component, resulting in a search for the first occurrence of this element in the component template:
+```ts
+@ViewChild('serverContentInput') serverContentInput: ElementRef;
+...
+onAddServer(nameInput: HTMLInputElement) {
+  this.serverCreated.emit({
+      serverName: nameInput.value, 
+      serverContent: this.serverContentInput.nativeElement.value
+    });
+}
+```
+```html
+<input 
+  type="text" 
+  class="form-control"
+  #serverContentInput>    
+```
+
+However, it is important to highlight that manipulating the DOM directly through ``ViewChild`` is not considered good practice. Direct access to template elements in any component cannot be done, but it is recommended to avoid direct DOM manipulations whenever possible.
+
+A specific consideration for versions from Angular 8 onwards is the need to add ``{ static: true }`` as a second argument when using ``@ViewChild()  n``. This change must be applied to all instances of ``@ViewChild()`` with the intention of accessing the selected element within the ``ngOnInit()`` method. If access occurs anywhere else in the component, you must use { static: false }.
+
+For Angular 9 versions from now on, just adding ``{ static: true }`` (if necessary) is enough, and adding ``{ static: false }`` is no longer necessary.
+
+
+### Content Projection
+> https://angular.io/guide/content-projection
+
+> [Single Slot](./cmp-databinding-start/src/app/server-element/server-element.component.html)
+
+
+In Angular, by default, everything inside the opening and closing tags of a component or element is automatically removed. This can be understood as if the variables were in a temporary scope intended exclusively for passing to the component.
+
+The ng-content directive is introduced as a hook, used as a selector in the component to indicate where Angular will inject the content between the opening and closing tags when the component is called. It is mentioned that, by default, injected HTML inherits the CSS scope of the component that is injecting it.
+
+This by default is single-slot content projection, but there are also multi-slot content projection and conditional content projection.
+
+
+### Lifecycle Hooks
+> https://angular.dev/guide/components/lifecycle
+
+> [Lifecycle](./cmp-databinding-start/src/app/server-element/server-element.component.ts)
+
 
 ## Data Binding
 - Binding possibilities:
@@ -129,6 +193,9 @@ You can listen in a parent to those event emitters [like this](./cmp-databinding
 
 
 ## Directives
+
+Directives are classes that add additional behavior to elements in your Angular applications. Use Angular's built-in directives to manage forms, lists, styles, and what users see.
+
  - ``*`` is extra information to Angular that the ``ngIf`` for example(or whatever directive is) changes de structure of DOM adding or not an element. So must use ``*ngIf``.
  - ``#something`` in else is a local reference (deep later).
  - Remember that directives are different than property binding, so, ``ngStyle`` is a directive when used like ``[ngStyle]`` you are indicating that you are binding a property called ``ngStyle`` in one-way binding. We are binding to a property of the directive.
