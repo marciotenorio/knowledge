@@ -27,7 +27,7 @@ The final file deployed is filled with Javascript bundle imports that are inject
 It's only possible to use ``[(ngModel)]="name"`` if the ``import {FormsModule} from '@angular/forms'`` dependency are imported in ``app.module.ts`` like [here](first-app/src/app/app.module.ts).
 
 ## Components
-- New components are created inside the ``app`` folder by the CLI and you can specify the module if there is more than one using ``-m module-name``. Example:  
+- New components are created inside the ``app`` folder by the CLI and you can specify the module if there is more than one using ``-m module-name``, use ``--path start-by-root/src/etc`` to specific path. Example:  
   > ``ng generate component name-component`` 
   
   > ``ng g c name-component``
