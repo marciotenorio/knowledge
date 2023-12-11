@@ -47,11 +47,10 @@ It's only possible to use ``[(ngModel)]="name"`` if the
 ``app.module.ts`` like [here](./learn-angular/src/app/app.module.ts).
 
 ## Components
-- New components are created inside the ``app`` folder by the CLI and you can 
-specify the module if there is more than one using ``-m module-name``. Example:  
+- New components are created inside the ``app`` folder by the CLI and you can specify the module if there is more than one using ``-m module-name``, use ``--path start-by-root/src/etc`` to specific path. Example:  
   > ``ng generate component name-component`` 
   
-  > ``ng g c name-component``
+  > ``ng g c name-component -m module-name --path start-by-root/src/etc``
 - The angular selectors start with ``app-`` because are encouraged by the 
 angular to follow the convention about custom elements. You can remove this 
 manually or remove it in the "prefix" property on the angular.json.
