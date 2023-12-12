@@ -133,7 +133,7 @@ export class CockpitComponent implements OnInit {
 ```
 Your component creates custom properties called ``serverCreated`` and ``blueprintCreated``, and the second one has an alias called ``bpCreated`` which is your name outside the custom element/component. Both have ``EventEmitter<>`` type, which in the diamond carries the type of data he will send. 
 
-To send the date to the parent custom element/component you can do this:
+To send the data to the parent custom element/component you can do this:
 ```ts
   onAddServer() {
     this.serverCreated.emit({serverName: this.newServerName, serverContent: this.newServerContent});
