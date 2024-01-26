@@ -1,12 +1,12 @@
-# Arquitetura Orientada A Eventos
+# Event-Driven Architecture - EDA
 
-## Tratamento de Erros 
+## Error Handling 
 
 ### Dead Letter Queue - *DLQ*
 
-Consiste no envio para outra fila/log separada (a DLQ) mensagens que não puderam ser enviadas para outras filas, serviços, não foram processadas corretamenta, perderam TTL, etc para que não sejam perdidas. Redirecionamento feito pelo proprio broker ou middleware.
+It's an approach that consists of sending to a different queue (DLQ) messages that can't be processed, sent to the correct queue or lose your TTL, for example. Redirection is made by the broker itself or a middleware.
 
 ![DQL Illustration](../../../img/dlq-illustration.png)
 Fonte: [redpanda](https://redpanda.com/blog/reliable-message-processing-with-dead-letter-queue)
 
-Na DLQ ela pode ser reprocessada automaticamente, inspecionada para ajudar na correção do problema ou até manualmente reprocessada.
+In the DLQ the message can be reprocessed automatically, inspected to help in the troubleshooting or even manually reprocessed.
