@@ -1,9 +1,9 @@
-# Algorithm and Data Structures
+# Algorithms and Data Structures
 
 ## Summary
 
--[../Fundamentals](../fundamentals.md)
--[Basics](#basics)
+- [. . /Fundamentals](../fundamentals.md)
+- [Basics](#basics)
 
 ### Basics
 
