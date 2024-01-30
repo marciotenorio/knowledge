@@ -1,6 +1,7 @@
 using System.Net.Mime;
 using DotNetLearning.Database;
 using DotNetLearning.Models;
+using DotNetLearning.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Formatters;
 using Microsoft.EntityFrameworkCore;
@@ -19,8 +20,9 @@ public class UniversityController : ControllerBase
     }
 
     [HttpGet("students")]
-    public async Task<ActionResult<IEnumerable<Student>>> GetAllStudents()
+    public async Task<ActionResult<IEnumerable<Student>>> GetAllStudents([FromServices] TestDIService service)
     {
+        var testDiService = service;
         return await _context.Students
             .ToListAsync();
     }

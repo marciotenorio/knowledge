@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 
 @Component({
-  selector: 'app-root',
-  templateUrl: './app.component.html',
-  styleUrls: ['./app.component.css'],
+  selector: 'app-the-basics-wrapper',
+  templateUrl: './the-basics-wrapper.component.html',
+  styleUrl: './the-basics-wrapper.component.css',
   /**
    * Styles have high precedence
    */
@@ -19,6 +19,6 @@ import { Component } from '@angular/core';
   `
   ]
 })
-export class AppComponent {
-  title = 'first-app';
+export class TheBasicsWrapperComponent {
+
 }

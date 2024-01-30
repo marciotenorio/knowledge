@@ -1,4 +1,5 @@
 using System.Reflection;
+using DotNetLearning.Configuration;
 using DotNetLearning.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
@@ -27,6 +28,8 @@ builder.Services.AddDbContext<DotNetLearningContext>(options =>
 {
     options.UseSqlite("db");
 });
+
+builder.Services.ResolveDepencies();
 
 var app = builder.Build();
 

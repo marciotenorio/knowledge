@@ -3,8 +3,42 @@
 # Summary
 
 - [. . /Frameworks](../frameworks.md)
+- [DbContext](#dbcontext)
 - [Entity Tracking](#tracking-and-no-tracking)
 
+
+# DbContext
+> Source: https://learn.microsoft.com/en-us/ef/core/dbcontext-configuration/
+>   
+> Article: https://martinfowler.com/eaaCatalog/unitOfWork.html
+
+The lifetime of a DbContext begins when the instance is created and ends when the instance is disposed. A DbContext instance is designed to be used for a single unit-of-work. This means that the lifetime of a DbContext instance is usually very short.
+
+The DbContext are not thread-safe.
+
+DbContext in dependency injection for ASP.NET Core, you can configure like this in ``Startup.cs`` or with some changes in ``Program.cs``:
+```cs
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddControllers();
+
+    services.AddDbContext<ApplicationDbContext>(
+        options => options.UseSqlServer("name=ConnectionStrings:DefaultConnection"));
+}
+```
+
+The ApplicationDbContext class must expose a public constructor with a DbContextOptions<ApplicationDbContext> parameter. This is how context configuration from AddDbContext is passed to the DbContext. For example:
+```cs
+public class ApplicationDbContext : DbContext
+{
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        : base(options) {}
+}
+```
+
+So now you can use ``DbContext`` through DI in construtor or [FromServices]. The final result is an ApplicationDbContext instance created for each request and passed to the controller to perform a unit-of-work before being disposed when the request ends.
+
+OnConfiguring can be used to perform additional configuration even when AddDbContext is being used
 
 
 
@@ -13,7 +47,7 @@
 
 Tracking behavior controls if Entity Framework Core keeps information about an entity instance in its change tracker. If an entity is tracked, any changes detected in the entity are persisted to the database during ``SaveChanges()`` method call. EF Core also fixes up navigation properties between the entities in a tracking query result and the entities that are in the change tracker. 
   
-**Tracking:** By default, queries that return entity types (e.g. models that have key) are tracking.
+**Tracking:** By default, queries that return entity types (e.g. models that have keys) are tracked and we can add or attach entities to the context.
 ```cs
 var blog = context.Blogs.SingleOrDefault(b => b.BlogId == 1);
 blog.Rating = 5;
@@ -55,7 +89,6 @@ protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 
 **Tracking and custom projections:** Even if the result type of the query isn't an entity type, EF Core will still track entity types contained in the result by default. In the following query, which returns an anonymous type, the instances of Blog in the result set will be tracked.
 ```cs
-//
 var blog = context.Blogs
     .Select(
         b =>
@@ -69,7 +102,7 @@ var blog = context.Blogs
     .Select(
         b =>
             new { Blog = b, Post = b.Posts.OrderBy(p => p.Rating).LastOrDefault() });
-            //'b' and if 'Rating' be a database entity will be tracked
+            //'Blog=b' and if 'Post=b.Posts...' be a database entity will be tracked
 ```
 
 If the result set doesn't contain any entity types, then no tracking is done.

@@ -10,7 +10,6 @@ export class PracticeDatabindingComponent {
   username = '';
 
   checkUsername(): boolean {
-    console.log('kkk')
     return this.username.length === 0;
   }
 }

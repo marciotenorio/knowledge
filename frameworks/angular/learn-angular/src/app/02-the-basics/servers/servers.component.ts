@@ -43,7 +43,7 @@ export class ServersComponent {
     }, 2000)
   }
 
-  onServerCreated(event){
+  onServerCreated(event: Event){
     this.servers.push(this.serverName);
     this.serverCreated = true;
     this.serverCreationStatus = 'Server was created! Name is' + this.serverName ;
