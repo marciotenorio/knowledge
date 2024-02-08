@@ -1,12 +1,12 @@
-function falarDepoisDe(segundos, frase) {
+function talkLaterOf(sec, phrase) {
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve(frase)
-        }, segundos * 1000)
+            resolve(phrase)
+        }, sec * 1000)
     })
 }
 
-falarDepoisDe(3, 'Que legal!')
-    .then(frase => frase.concat('?!?'))
-    .then(outraFrase => console.log(outraFrase))
-    .catch(e => console.log(e))
+talkLaterOf(2, 'TAKE AWAYYYYY')
+    .then(phrase => console.log(phrase))
+
+//TODO exercises
