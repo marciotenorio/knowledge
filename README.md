@@ -1,6 +1,6 @@
 # Knowledge
 
-### This repository are an effort to sintetize the knowledge acquired over the years from my Information Technology/Software Engineering bachelor in IMD/UFRN and professional experience. There is some scaffolds, snippets and the other codes like these to improve programming speed and quality.
+### This repository are an effort to sintetize the knowledge acquired over the years from my Information Technology/Software Engineering bachelor in IMD/UFRN and professional experience. There is some scaffolds, snippets and the other codes like these to improve programming speed and quality. This is not a effort to substitute official docs, only a mindnotes to me =)
 
 # Summary
 
