@@ -77,7 +77,7 @@ Doing some math:
 > $$ \frac{n}{2^{i-1}} = 1 \implies n = 1.2^{i-1} \implies log_2 \space n = log_2 \space 2^{i-1} \implies
 log_2 \space n = (i-1) * log_2 \space 2 \implies i = 1 + \log_2 n \  $$
 
-Take care only of the terms that define complexity, we have: $i = \log_2 n$
+Take care only of the terms that define complexity, we have: $i = \log_2 n$ .
 
 
 
