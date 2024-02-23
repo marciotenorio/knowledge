@@ -28,4 +28,4 @@ jobs:
         distribution: 'temurin'
         cache: maven
     - name: Test with Maven
-      run: mvn -f fundamentals/ds-algo/java/algo test
+      run: mvn -f fundamentals/ds-algo/java/algo package
