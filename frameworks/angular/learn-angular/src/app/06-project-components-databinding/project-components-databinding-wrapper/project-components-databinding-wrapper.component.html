@@ -1,0 +1,12 @@
+<div class="container-fluid">
+    <div class="row">
+        <app-header (currentPage)="onSelectPage($event)"></app-header>
+        <section>
+            <app-recipe-book *ngIf="currentPage == 'recipe-book'"></app-recipe-book>
+            <app-recipe *ngIf="currentPage == 'recipe'"></app-recipe>
+            <app-shopping-list *ngIf="currentPage == 'shopping-list'"></app-shopping-list>
+        </section>
+    </div>
+</div>
+
+
