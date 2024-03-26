@@ -239,3 +239,13 @@ Directives are classes that add additional behavior to elements in your Angular 
  - ``*`` is extra information to Angular that the ``ngIf`` for example(or whatever directive is) changes de structure of DOM adding or not an element. So must use ``*ngIf``.
  - ``#something`` in else is a local reference (deep later).
  - Remember that directives are different than property binding, so, ``ngStyle`` is a directive when used like ``[ngStyle]`` you are indicating that you are binding a property called ``ngStyle`` in one-way binding. We are binding to a property of the directive.
+
+
+| Structural   | Attribute   |
+|---|---|
+| Look like a normal HTML Attribute but have a leading * (for desugaring)   |  Look like a normal HTML Attribute (possibly with databinding or event binding) |
+| Affect a whole area in the DOM (elements get added/ removed) | Only affect/ change the element they are added to |
+
+
+When a directive are created the selector used in your TS file is ``'[directiveName]'``, which means only that Angular will find him based on a CSS attribute like. 
+When you call, the syntax are like ``<p directiveName>Ok!</p>``.
