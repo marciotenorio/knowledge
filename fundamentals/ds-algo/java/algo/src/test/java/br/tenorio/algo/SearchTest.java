@@ -15,12 +15,12 @@ class SearchTest {
     @Test
     void binary_valueExistsInArray_returnLastIndex() {
         int[] arr = {1,4,6,8,9,16};
-        assertThat(search.arraySearch(16, arr, arr.length)).isEqualTo(arr.length - 1);
+        assertThat(search.binary(16, arr, arr.length)).isEqualTo(arr.length - 1);
     }
 
     @Test
     void binary_valueNotExistsInArray_returnMinus1() {
         int[] arr = {1,4,6,8,9,16};
-        assertThat(search.arraySearch(20, arr, arr.length)).isEqualTo(-1);
+        assertThat(search.binary(20, arr, arr.length)).isEqualTo(-1);
     }
 }

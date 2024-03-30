@@ -1,13 +1,16 @@
 package br.tenorio.algo;
 
+/**
+ * Implement search algorithms
+ */
 public class Search {
 
     /**
      * @param value to be found
-     * @param arr collection of values
+     * @param arr array of values
      * @return index if are found or -1, if not.
      */
-    public int arraySearch(int value, int[] arr, int len){
+    public int binary(int value, int[] arr, int len){
         int mid;
         int begin = 0;
         int end = len - 1;
@@ -21,4 +24,6 @@ public class Search {
         }
         return -1;
     }
+
+    //TODO insertion
 }
