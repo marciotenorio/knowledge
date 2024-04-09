@@ -1,1 +1,18 @@
 <p appBasicHighlight>root-07-directives-deep-dive works!</p>
+<p [appBetterHighlight]="'red'"
+    defaultColor="yellow"> <!-- Removing [] and '' -->
+    root-07-directives-deep-dive works better!
+</p>
+
+<p *ngIf="true">Rendered =)</p>
+
+<ng-template [ngIf]="true">
+    <p>Rendered =)</p>
+</ng-template>
+
+<p *appUnless="false">My own opposite "ngIf" hehe =)</p>
+
+<div [ngSwitch]="value">
+    <div *ngSwitchCase="0">Even hehe</div>
+    <div *ngSwitchDefault>Default, when is odd.</div>
+</div>

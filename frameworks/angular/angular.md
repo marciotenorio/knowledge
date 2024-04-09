@@ -238,7 +238,8 @@ Directives are classes that add additional behavior to elements in your Angular 
 
  - ``*`` is extra information to Angular that the ``ngIf`` for example(or whatever directive is) changes de structure of DOM adding or not an element. So must use ``*ngIf``.
  - ``#something`` in else is a local reference (deep later).
- - Remember that directives are different than property binding, so, ``ngStyle`` is a directive when used like ``[ngStyle]`` you are indicating that you are binding a property called ``ngStyle`` in one-way binding. We are binding to a property of the directive.
+ - Remember that directives are different than property binding, so, ``ngStyle`` is a directive when used like ``[ngStyle]`` you are indicating that you are binding a property called ``ngStyle`` in one-way binding. We are binding to a property of the directive. A directive are name in your file as ``[directiveName]`` only to say for Angular that: "Hey, select this thing
+like a attribute".
 
 
 | Structural   | Attribute   |
@@ -249,3 +250,40 @@ Directives are classes that add additional behavior to elements in your Angular 
 
 When a directive are created the selector used in your TS file is ``'[directiveName]'``, which means only that Angular will find him based on a CSS attribute like. 
 When you call, the syntax are like ``<p directiveName>Ok!</p>``.
+
+It's not a good practice to access DOM directly (for example, using ElementRef). Some cases there ir no DOM to acces and will take a error, 
+instead use ``Render2``, its a better approach because Angular will resolve how to set the property in which environment you be.
+Examples [bad practice](./learn-angular/src/app/07-directives-deep-dive/basic-highlight.directive.ts) and 
+[good practice](./learn-angular/src/app/07-directives-deep-dive/better-highlight.directive.ts) 
+
+```js
+  constructor(
+    private elRef: ElementRef,
+    private renderer: Renderer2
+  ) { }
+
+  ngOnInit() {
+    this.renderer.setStyle(this.elRef.nativeElement, 'background-color', 'blue');
+  }
+```
+
+
+Listening events in a directive to do reactive things like mouseenter, etc using [@HostListener](./learn-angular/src/app/07-directives-deep-dive/better-highlight.directive.ts).
+
+```js
+  @HostListener('mouseenter') mouseover(event: Event) {
+    //TODO 
+  }
+```
+
+
+You can bind properties using [@HostBinding](./learn-angular/src/app/07-directives-deep-dive/better-highlight.directive.ts), Angular know if is a property binding or a HostBinding check if propoerty exists in a tag or in a directive. To use like ``[style]`` that don't is enclosed you can create a input with same name of
+property or a alias like [here](./learn-angular/src/app/07-directives-deep-dive/better-highlight.directive.ts) and [here](./learn-angular/src/app/07-directives-deep-dive/root-07-directives-deep-dive/root-07-directives-deep-dive.component.html).
+When you are passing a string with '' and [] you can remove to simplify, careful because its clear that indicate a property binding, like
+[here](./learn-angular/src/app/07-directives-deep-dive/root-07-directives-deep-dive/root-07-directives-deep-dive.component.html).
+
+
+Star (\*) in structural directives are only a sintax sugar to us, behind the scenes Angular translate them and use the primitive binding
+types (property, string interpolation, event and two-way). We can achive as a example, like [this](./learn-angular/src/app/07-directives-deep-dive/root-07-directives-deep-dive/root-07-directives-deep-dive.component.html). Also, star (*) transform the in ``ng-template`` syntax and then 
+try to property bind in directive name, that is, ``appUnless``.
+
