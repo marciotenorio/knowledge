@@ -152,3 +152,6 @@ hs_err_pid*
 
 #General
 *.DS_Store
+
+#Postgres
+**/*postgres/**
