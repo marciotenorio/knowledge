@@ -8,6 +8,7 @@
 - [Components](#components)
 - [Data Binding](#data-binding)
 - [Directives](#directives)
+- [Services and DI](#services-and-di)
 
 
 ## Start
@@ -287,3 +288,38 @@ Star (\*) in structural directives are only a sintax sugar to us, behind the sce
 types (property, string interpolation, event and two-way). We can achive as a example, like [this](./learn-angular/src/app/07-directives-deep-dive/root-07-directives-deep-dive/root-07-directives-deep-dive.component.html). Also, star (*) transform the in ``ng-template`` syntax and then 
 try to property bind in directive name, that is, ``appUnless``.
 
+
+## Services and DI
+
+Services are place to centralize business rules, use cases or state for those things, so that other components can interact with them.
+
+A TS class without DI (constructor, for example) can be used as a service,
+but it's not recommend because with this approach you won't use Angular DI
+to handle the object lifecycle.
+
+### Hierarchical Injection
+
+Angular DI are build with the Hierarchical Injection.
+Thinking in a component tree, a service injected in a specific component
+are the same for those component and all his child components
+(see how to get this behavior and also avoid). This behavior are only
+granted to down (childs) not the up in the tree. For example:
+
+![Angular DI approach](../../img/hierarchical-injector-angular.png)
+
+In this example, we have a service ``S0`` that are inject in ``root`` component and components ``c1`` and ``c1.1`` receive the same instance (them don't use ``providers: [S0]``). In ``c2`` and ``c2.1`` we have the same instance of ``S0``, but we inject ``S1`` service and in ``c2.1`` the ``S1`` are inject using DI but we used ``providers: [S1]``, so that we have a new instance of ``S1"``.
+
+Some observations about services scopes:
+- Highest level is the app module, the service are available
+to all application.
+- In the app component, is available to all components, but not for other services.
+
+
+To receive another service being inject in your service, we need to 
+decorate the service that are receiving another with ``@Injectable()``. 
+The service that are inject don't need this annotation, but it's a good
+practice put to evict problems in future versions.
+
+In Angular 6+ we can provide a visibility/scope of a service using
+the decorator ``@Injectable(providedIn: 'root')``, when 'root' are for the
+all application like app module.
