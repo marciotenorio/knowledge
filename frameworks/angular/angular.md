@@ -9,6 +9,7 @@
 - [Data Binding](#data-binding)
 - [Directives](#directives)
 - [Services and DI](#services-and-di)
+- [Routing](#routing)
 
 
 ## Start
@@ -323,3 +324,152 @@ practice put to evict problems in future versions.
 In Angular 6+ we can provide a visibility/scope of a service using
 the decorator ``@Injectable(providedIn: 'root')``, when 'root' are for the
 all application like app module.
+
+
+## Routing
+
+With this, you can navigate between pages/components, pass parameters, query strings, load data, create rules with guards to some routes, load child
+routes using ``router-outlet`` and much more.
+
+You can import ``RouterModule`` in ``AppModule``, craete a const array
+with your routes and with ``.forRoot()`` add them to ``RouterModule``.
+
+The ``router-outlet`` marks the place when de route component will render.
+Remember that with nested paths you can have N ``router-outlet`` `s.
+Always keep in mind that to deal with ambiguous paths/routes.
+
+You can organize routes using modules and than import them in ``AppModule`` to have a better code architecture.
+
+### Navigating
+
+It's not cool to use reload in a SPA, so try to use always ``routerLink="some"`` or ``[routerLink]=['some', 10]`` to navigate away.
+
+There are two types of routes talking about ``routerLink``: absolute ("/some")
+which will look to the root of your RouterModule and go to /some and
+relative ("some") which will append to the current URL.
+You can navigate back like "../some" that will back and apply /some,
+remember that it not back only one segment but the entire loaded route
+(remember about nested paths).
+
+You can stylize something based if the routes are active or not, to do
+this exist [routerLinkActive](./learn-angular/src/app/11-changing-pages-with-routing/root-11-changing-pages-with-routing/root-11-changing-pages-with-routing.component.html#6).
+He looks to the current path (if is part of or even leads to the current path), loaded components and applies the CSS based on this approach. 
+To apply to only an exact match you can use [routerLinkActiveOptions](./learn-angular/src/app/11-changing-pages-with-routing/root-11-changing-pages-with-routing/root-11-changing-pages-with-routing.component.html#7).
+
+To programmatically navigate, you can use [Router.navigate()](./learn-angular/src/app/11-changing-pages-with-routing/servers-11/server-11/server-11.component.ts#28).
+Using this method, Angular doesn't know where you are, so to
+do some append in route and other logic that it's necessary to know
+where you are, you need to provide ``relativeTo: ActivatedRoute`` to 
+tell Angular the active.
+
+Path variables like ``/users/:id`` are interpreted by Angular as 
+dynamic part of URL. To send them, you can mount the URL with
+them using [routerLink](./learn-angular/src/app/11-changing-pages-with-routing/servers-11/servers-11.component.html#5)
+or with [navigate()](./learn-angular/src/app/11-changing-pages-with-routing/home-11/home-11.component.ts#20). To get those things you can use a [snapshot](./learn-angular/src/app/11-changing-pages-with-routing/users-11/user-11/user-11.component.ts#19)
+to get the data in a specific time or [subscribe](./learn-angular/src/app/11-changing-pages-with-routing/users-11/user-11/user-11.component.ts#24)
+in an observable to get all changes (Angular automatically unsubscribes these subscriptions) and remember that the type is string when you receive.
+It if is needed to keep/merge the query params and fragments when navigating between
+routes, you can use [queryParamsHandling and preserveFragment](./learn-angular/src/app/11-changing-pages-with-routing/servers-11/server-11/server-11.component.ts#28).
+
+To deal with query params and go to specific HTML elements (e.g fragment) you can use
+[[queryparams]={ key: value } and fragment=htmlTag](./learn-angular/src/app/11-changing-pages-with-routing/servers-11/servers-11.component.html#6) in a template.
+Using the ``Router`` you can work with [navigate()](./learn-angular/src/app/11-changing-pages-with-routing/home-11/home-11.component.ts#20).
+To get those things you can deal with the same ``ActivatedRoute`` getting 
+[snapshot or observable](./learn-angular/src/app/11-changing-pages-with-routing/servers-11/edit-server-11/edit-server-11.component.ts#28)
+and remember to convert the data because is a string.
+
+### Handle Unknown Routes
+
+To handle all unknown typed routes you can use ``**`` as wildcard being the
+last route. By default, Angular matches paths by prefix which means that the router checks URL elements from the left to see if the URL matches a specified path. For example, '/team/11/user' matches 'team/:id'. You can specify the path-match strategy ``pathMatch`` 'full' to make sure that the path covers the whole unconsumed URL. You can ``redirect`` to some routes too.
+
+In a module, the property ``exports: []`` exposes what is accessible from the
+module itself to who is imported.
+
+### Guards
+
+Guards are hooks when you enter and exit a route, respectively
+``canActivate``, ``canActivateChild`` and ``canDeactivate``. You can protect the whole route
+(current and children) or only children.
+They can work with block and non-blocking processing.
+
+Talking about class-based (deprecated), basically you will:
+- Implement an interface in a service [here](./learn-angular/src/app/11-changing-pages-with-routing/auth-guard.service.ts)
+- Exposes like [here](./learn-angular/src/app/11-changing-pages-with-routing/changing-pages-with-routing-artifacts.ts#29)
+- Import in a route definition, [like](./learn-angular/src/app/11-changing-pages-with-routing/changing-pages-with-routing-artifacts.ts#45)
+
+
+With functional-based, you can just create a [function inline](./learn-angular/src/app/11-changing-pages-with-routing/changing-pages-with-routing-artifacts.ts#58) 
+or work with [exports](./learn-angular/src/app/11-changing-pages-with-routing/guards-functional.ts) to have better organization.
+
+If you want to use the component state to execute some logic in deactivate,
+one approach is:
+- Create an interface like CanComponentDeactivate  that will be injected (class-based)
+- Create a Guard and implement ``CanDeactivate<CanComponentDeactivate>``
+- Implement the Guard (in TS a class can implement other [see.](https://stackoverflow.com/questions/38834625/extends-and-implements-difference-typescript))
+  
+![Explanation](../../img/candeactivate-using-component-state-approach.png)
+
+It works because when `EditServer` implements the guard the method in the contract is equal in both interfaces (see the image) and fulfills the role to respect both contracts.
+
+You can pass data in routes using [data property](./learn-angular/src/app/11-changing-pages-with-routing/changing-pages-with-routing-artifacts.ts#L56). It's a valid approach to reuse code.
+
+### Resolvers - Load Data
+
+To load some data before entering in route/load component you can use
+the interface (class-based) [Resolver](./learn-angular/src/app/11-changing-pages-with-routing/servers-11/server-11/server-resolver.service.ts) and use the property in a [route](./learn-angular/src/app/11-changing-pages-with-routing/changing-pages-with-routing-artifacts.ts#L50). To get the data, use ``ActivatedRoute`` with the same
+name used in a property like [here](./learn-angular/src/app/11-changing-pages-with-routing/servers-11/server-11/server-resolver.service.ts#L20).
+
+
+You can the new approach with ``ResolveFn`` following the function-based 
+approach. An [example](./learn-angular/src/app/11-changing-pages-with-routing/guards-functional.ts#L23) and getting the
+[data](./learn-angular/src/app/11-changing-pages-with-routing/changing-pages-with-routing-artifacts.ts#L43).
+
+### Location Strategies
+> [Source](https://www.tektutorialshub.com/angular/angular-location-strategies/)
+
+There are two ways to navigate in Angular, this is called
+LocationStrategy: Hash(old) and Path(new with HTML5), this defines how 
+our URL/Request is resolved. This approach looks like this:
+
+- **HashLocationStrategy** Where URL looks like http://localhost:4200/#/product. 
+
+The Hash style routing uses the anchor tags technique to achieve
+client-side routing. The anchor tags, when used along with the # allow us
+to jump to a place, within the web page. When the requested anchor tag is
+on the current page, then the browser does not send the request to the Web server.
+Only the URL sent to the server is ``http://localhost:4200``, the ``#/product`` is never sent to the server.
+- **PathLocationStrategy** Where the URL looks like http://localhost:4200/product.
+Using history.pushState() method, we can now programmatically add the
+browser history entries and change the location without triggering a
+server page request. 
+
+What would happen, when you type the URL http://www.example.com/ProductList and hit the refresh button.
+
+The browser will send the request to the web server. Since the page ProductList does not exist, it will return the 404 (page not found) error.
+
+This problem could be solved, if we are able to redirect all the requests to the index.html
+
+It means that when you ask from http://www.example.com/ProductList, the Web server must redirect it to index.html and return the request. Then in the Front-end Angular will read the URL and dynamically load the ProductListComponent.
+
+To make HTML5 routing work you need to send the instruction to the webserver to serve /index.html for any incoming request, no matter what the path is.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

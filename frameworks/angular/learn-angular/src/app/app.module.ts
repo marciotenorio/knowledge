@@ -7,7 +7,10 @@ import { FormsModule } from '@angular/forms';
 import THE_BASICS_ARTIFACTS from './02-the-basics/the-basics-artifacts';
 import COMPONENTS_DATABINDING_ARTIFACTS from './05-components-databinding/components-databinding-artifacts';
 import DIRECTIVES_DEEP_DIVE_ARTIFACTS from './07-directives-deep-dive/directives-deep-dive-artifacts';
-import { INJECTING_SERVICES_AND_DI_ARTIFACTS, USING_SERVICES_AND_DI_ARTIFACTS } from './09-using-services-and-di/using-services-and-di-artifacts';
+import { INJECTING_SERVICES_AND_DI_ARTIFACTS, USING_SERVICES_AND_DI_ARTIFACTS } from './09-using-services-and-di/services-and-di-artifacts';
+import { INJECTING_CHANGING_PAGES_WITH_ROUTING, USING_CHANGING_PAGES_WITH_ROUTING } from './11-changing-pages-with-routing/changing-pages-with-routing-artifacts';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { ErrorPage11Component } from './11-changing-pages-with-routing/error-page/error-page-11.component';
 
 //Learn about standalone components later
 @NgModule({
@@ -16,7 +19,10 @@ import { INJECTING_SERVICES_AND_DI_ARTIFACTS, USING_SERVICES_AND_DI_ARTIFACTS } 
     ...THE_BASICS_ARTIFACTS,
     ...COMPONENTS_DATABINDING_ARTIFACTS,
     ...DIRECTIVES_DEEP_DIVE_ARTIFACTS,
-    ...USING_SERVICES_AND_DI_ARTIFACTS
+    ...USING_SERVICES_AND_DI_ARTIFACTS,
+    ...USING_CHANGING_PAGES_WITH_ROUTING,
+    NotFoundComponent,
+    ErrorPage11Component
   ],
   imports: [
     FormsModule,
@@ -24,7 +30,8 @@ import { INJECTING_SERVICES_AND_DI_ARTIFACTS, USING_SERVICES_AND_DI_ARTIFACTS } 
     AppRoutingModule
   ],
   providers: [
-    ...INJECTING_SERVICES_AND_DI_ARTIFACTS
+    ...INJECTING_SERVICES_AND_DI_ARTIFACTS,
+    ...INJECTING_CHANGING_PAGES_WITH_ROUTING
   ],
   bootstrap: [AppComponent]
 })
