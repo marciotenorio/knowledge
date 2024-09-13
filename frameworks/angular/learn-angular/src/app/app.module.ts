@@ -11,6 +11,8 @@ import { INJECTING_SERVICES_AND_DI_ARTIFACTS, USING_SERVICES_AND_DI_ARTIFACTS } 
 import { INJECTING_CHANGING_PAGES_WITH_ROUTING, USING_CHANGING_PAGES_WITH_ROUTING } from './11-changing-pages-with-routing/changing-pages-with-routing-artifacts';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { ErrorPage11Component } from './11-changing-pages-with-routing/error-page/error-page-11.component';
+import { USING_UNDERSTANDING_OBSERVABLES } from './13-understanding-observables/understanding-observables-artifacts';
+import { CommonModule } from '@angular/common';
 
 //Learn about standalone components later
 @NgModule({
@@ -21,10 +23,12 @@ import { ErrorPage11Component } from './11-changing-pages-with-routing/error-pag
     ...DIRECTIVES_DEEP_DIVE_ARTIFACTS,
     ...USING_SERVICES_AND_DI_ARTIFACTS,
     ...USING_CHANGING_PAGES_WITH_ROUTING,
+    ...USING_UNDERSTANDING_OBSERVABLES,
     NotFoundComponent,
-    ErrorPage11Component
+    ErrorPage11Component,
   ],
   imports: [
+    CommonModule,
     FormsModule,
     BrowserModule,
     AppRoutingModule

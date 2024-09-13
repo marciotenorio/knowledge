@@ -10,6 +10,7 @@
 - [Directives](#directives)
 - [Services and DI](#services-and-di)
 - [Routing](#routing)
+- [RxJS](#rxjs)
 
 
 ## Start
@@ -456,10 +457,35 @@ To make HTML5 routing work you need to send the instruction to the webserver to 
 
 
 
+## RxJS 
 
+RxJS is a library for composing asynchronous and event-based programs by using observable sequences. It provides one core type, the Observable, satellite types (Observer, Schedulers, Subjects) and operators inspired by Array methods (map, filter, reduce, every, etc) to allow handling asynchronous events as collections.
 
+ReactiveX combines the Observer pattern with the Iterator pattern and functional programming with collections to fill the need for an ideal way of managing sequences of events.
 
+The essential concepts in RxJS which solve async event management are:
 
+- Observable: represents the idea of an invocable collection of future values or events.
+  
+- Observer: is a collection of callbacks that knows how to listen to values delivered by the Observable.
+
+- Subscription: represents the execution of an Observable, is primarily useful for cancelling the execution.
+ 
+- Operators: are pure functions that enable a functional programming style of dealing with collections with operations like map, filter, concat, reduce, etc.
+
+- Subject: is equivalent to an EventEmitter, and the only way of multicasting a value or event to multiple Observers.
+
+- Schedulers: are centralized dispatchers to control concurrency, allowing us to coordinate when computation happens on e.g. setTimeout or requestAnimationFrame or others.
+
+A basic resume with how to:
+> [Here](./learn-angular/src/app/13-understanding-observables/obs-sub-beh/obs-sub-beh.component.ts)
+some examples to create, subscribe and dispose some Observables
+and its derived types like: Subject and BehaviorSubject.
+
+> [Here](./learn-angular/src/app/13-understanding-observables/obs-sub-beh/obs-sub-beh.component.html)
+how to use them in templates with variables and yours subscriptions.
+Another way is to use angular ``async`` pipe, that handles the
+disposing to Observables.
 
 
 

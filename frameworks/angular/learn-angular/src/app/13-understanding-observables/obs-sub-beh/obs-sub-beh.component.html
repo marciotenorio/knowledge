@@ -1,0 +1,16 @@
+<h1>root-13-understanding-observables works!!</h1>
+<h4>Unicast (each has your own runtime: cold) Observable basic type</h4>
+<p>1º This is my interval counter {{ myObs$ | async }}</p>
+<p>2º This is my interval counter v2 {{ myData }}</p>
+<button (click)="clickV2()" class="btn btn-primary">Deactivate 2º</button>
+<hr>
+<h4>Multicast (shared runtime: hot ) Subject Examples</h4>
+<button (click)="increaseSubject()" class="btn btn-primary">Increase number in all paragraphs</button>
+<p>One: {{ mySubjectData }}</p>
+<p>Two: {{ mySubject | async }}</p>
+<hr>
+<h4>Multicast (shared runtime: hot ) BehaviorSubject Examples</h4>
+<p>One {{ myBehaviorSubject | async }}</p>
+<hr>
+<hr>
+<button [routerLink]="['observables']" class="btn btn-primary">Test if has some memory leak...(Open console)</button>
