@@ -19,6 +19,7 @@ How to calculate the request time in cache-aside strategy:
 
 Cache effectiveness: 
 > cache_check < service_call_time
+                
 > cache hit > cache miss
 
 How to calculate the hit rate:
