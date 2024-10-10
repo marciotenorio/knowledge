@@ -49,6 +49,24 @@ It's only possible to use ``[(ngModel)]="name"`` if the
 ``import {FormsModule} from '@angular/forms'`` dependency are imported in
 ``app.module.ts`` like [here](./learn-angular/src/app/app.module.ts).
 
+### Template Driven (TD)
+
+You ned add ``ngModel`` attribute to an input, Angular uses the ``<form>`` tag as selector and add ``name`` attribute to get the input in form object. 
+
+In HTML when you have a button inside a ``<form>``, click on it and
+will submit the form (do a request, normally), but besides that it also
+trigger a Javascript event: the submit event.
+We can listen that event using the ``(ngSubmit)=myFunc()``.
+
+To get the form itself i this approach, we can get create a form like:
+```html
+<form (ngSubmit)="onSubmit()" #f="ngForm">
+```
+where i have the event caught by ``(ngSubmit)=onSubmit()`` and creating
+a local reference that exposes it like a ngForm ``#f="ngForm"`` (can i "cast" local references?).
+
+
+
 ## Components
 - New components are created inside the ``app`` folder by the CLI and you can specify the module if there is more than one using ``-m module-name``, use ``--path start-by-root/src/etc`` to specific path. Example:  
   > ``ng generate component name-component`` 

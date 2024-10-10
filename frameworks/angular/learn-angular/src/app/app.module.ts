@@ -13,6 +13,7 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { ErrorPage11Component } from './11-changing-pages-with-routing/error-page/error-page-11.component';
 import { USING_UNDERSTANDING_OBSERVABLES } from './13-understanding-observables/understanding-observables-artifacts';
 import { CommonModule } from '@angular/common';
+import { USING_HANDLING_FORMS } from './15-handling-forms/handling-forms-artifacts';
 
 //Learn about standalone components later
 @NgModule({
@@ -24,8 +25,9 @@ import { CommonModule } from '@angular/common';
     ...USING_SERVICES_AND_DI_ARTIFACTS,
     ...USING_CHANGING_PAGES_WITH_ROUTING,
     ...USING_UNDERSTANDING_OBSERVABLES,
+    ...USING_HANDLING_FORMS,
     NotFoundComponent,
-    ErrorPage11Component,
+    ErrorPage11Component
   ],
   imports: [
     CommonModule,
