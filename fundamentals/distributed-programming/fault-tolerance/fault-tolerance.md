@@ -11,6 +11,7 @@
 - [Patterns of Error Recovery](#patterns-of-error-recovery)
 - [Patterns of Error Detection](#patterns-of-error-mitigation)
 - [Redundancy and Diversity](#redundancy-and-diversity)
+- [Fault Tolerance in Distributed Systems](#fault-tolerance-in-distributed-systems)
 
 # Introduction
 
@@ -317,3 +318,100 @@ Diversidade: uso de diferentes abordagens e componentes para evitar falhas.
 Existem vários tipos: hardware, software, funcional(algoritmos) e dados(fontes).
 
 Redudância por si só não garante tolerância a falhas e a diversidade deve acompanhar a redundância. 
+
+
+# Fault Tolerance In Distributed Systems
+
+## O que são sistemas distribuídos?
+- Múltiplos computadores
+- Comunicação e coordenação
+- Independência e autonomia
+
+## Sistemas paralelos vs Sistemas distribuídos
+
+## Principais desafios em sistemas distribuídos
+- Gerenciamento de estado
+- Tolerância a falhas
+- Comunicação
+- Escalabilidade
+
+## Problema da Latência de Rede
+- Atrasos de Comunicação
+- Impacto na Consistência
+- Efeito na Disponibilidade
+
+## Sincronização de Estado entre Nós
+- Replicação de Dados
+- Conflitos de Versão
+
+## Falhas de Comunicação e Partições de Rede
+- Partições de rede - criando ilha isoladas de nós
+- Split-Brain - diferentes partes dos sistema continuam operando independentemente
+- Desafios de Reconexão - reintegrar partes requer cuidadosa sincronização
+
+## Ponto Único de Falha - SPOF
+- Queda de nós
+- Redundância
+- Balaceamento
+
+## Falha Bizantina
+- Podem agir de forma arbitrária, incluindo maliciosa
+- Podem existir mensagens contraditórias enviadas uns aos outros
+- Problema dos generais bizantinos
+- Ordenação de eventos:
+  - Cada nó possui um relógio independente, causando dificuldade de sincronização
+  - Devido a latência e falta de relógio para todos os nós, eventos podem ocorrer fora de ordem aparente
+  - Problema: determinar ordem global e consistente dos eventos em todos os nós do sistema
+
+## Principais Abordagens
+
+### Consenso Bizantino
+
+Busca concordância entre componentes/nós em situações onde existe comportamento arbitrário/malicioso/defeituoso. Ex:\
+- Valores enviados não podem ser considerados confiáveis
+- Nós honestos não sabem quem são os maliciosos/defeitusos
+- Nós maliciosos podem conspirar
+- Nós honestos devem concordar em relação a mensagens recebidas
+
+> Teorema: 3m + 1 nós para tolerar ``m`` nós maliciosos
+
+Algoritmos:
+- Lamport Shostak e Pease - Bizantine Generals Problem
+- Practical Byzantine Fault Tolerance - PBFT
+- Federated Byzantine Agreement - FBA
+
+Aplicações conhecidas como: Bitcoin, Ethereum, Ripple, Stellar, etc.
+
+
+### Relógios Sincronizados
+
+Fundamental para garantir consistência na ordem de eventos e coordenar ações.
+Ex: logs, ordenar transações, etc.
+
+Cada nó possuí seu relógio, que podem ter valores diferentes, desviar do valor externo de referência e
+sincronizar os relógios é um requisito para aplicações distribuídas.\
+Tentativas de sincronização envolve delay inerente a comunicação via rede, entre outros problemas.
+
+Solução geral é fornecer serviços externos de relógio ou protocolos, como: NTP, PTP.\
+Exemplos de aplicações que utilizam algumas dessas técnicas: Google Spanner com TrueTime e DynamoDB.
+
+### Armazenamento Estável
+
+Técnicas de tolerância assumem um armazenamento de dados estável, algum estado anterior a falha deve
+estar disponível para recuperação.
+
+Abstrair o armazenamento de modo que se torna mais resiliente a possíveis problemas de discos físicos
+como: _null write_, _bad write_, _soft read error_, etc.
+
+Exemplos: 
+- Disk Shadowing
+- RAID
+
+### Processadores "Fail-stop"
+
+Para e suspende o processamento de nós que apresentam falhas. Ideia de não propagação de erros e 
+notificação de falha, facilitando a previsibilidade das falhas.
+
+Exemplos:
+- Cassandra - redistribui operações de rw quando um nó falha
+- Kubernetes com etcd e Raft - detecta falhas em nós e promove substituição
