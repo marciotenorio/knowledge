@@ -13,7 +13,7 @@
 - [RxJS](#rxjs)
 
 
-## Start
+# Start
 - Angular changes DOM at runtime. He uses shadow DOM to improve speed and 
 changes in an optimized way.
   
@@ -43,31 +43,95 @@ the selector described by knowing the component and its dependencies in the
 bootstrap array. Now he knows that he should insert the component here and he 
 has some HTML in this case he inserts what he has in app.component.html.
 
-## Forms
+# Forms
 
 It's only possible to use ``[(ngModel)]="name"`` if the 
 ``import {FormsModule} from '@angular/forms'`` dependency are imported in
 ``app.module.ts`` like [here](./learn-angular/src/app/app.module.ts).
 
-### Template Driven (TD)
+## Template Driven (TD)
 
-You ned add ``ngModel`` attribute to an input, Angular uses the ``<form>`` tag as selector and add ``name`` attribute to get the input in form object. 
+Angular infers the Form Object from the DOM. You need the ``FormsModule``.
+
+You need add ``ngModel`` attribute to an input, Angular uses the ``<form>`` tag as selector and add ``name`` attribute to get the input in form object. 
 
 In HTML when you have a button inside a ``<form>``, click on it and
 will submit the form (do a request, normally), but besides that it also
 trigger a Javascript event: the submit event.
 We can listen that event using the ``(ngSubmit)=myFunc()``.
 
-To get the form itself i this approach, we can get create a form like:
+To get the form itself in this approach, we can get create a form like:
 ```html
-<form (ngSubmit)="onSubmit()" #f="ngForm">
+<form (ngSubmit)="onSubmit(f)" #f="ngForm">
 ```
-where i have the event caught by ``(ngSubmit)=onSubmit()`` and creating
+where i have the event caught by ``(ngSubmit)=onSubmit(f)`` and creating
 a local reference that exposes it like a ngForm ``#f="ngForm"`` (can i "cast" local references?).
 
+Can i use the ``@ViewChild(f)`` to get the form, at last the f is a
+local reference.
+
+To add some validators you can use directly in template (it's TD approach right?),
+like ``required``, ``email``, Angular will detect them using as a selector and automatically create a configuration for those fields. See [here](./learn-angular/src/app/15-handling-forms/template-driven/template-driven.component.html#L33).
+There is some CSS classes in tag itself that indicate some behavios, 
+with ``ng`` prefix that are add and removed dynamically, like:
+```html
+<input _ngcontent-ng-c118132209="" type="email" id="email" 
+  ngmodel="" name="email" required="" email="" 
+  class="form-control ng-untouched ng-pristine ng-invalid" 
+  ng-reflect-required="" ng-reflect-email="" ng-reflect-model="" 
+  ng-reflect-name="email">
+```
+
+With this approach you can have:
+- No binding (only add ngModel, giving a 
+name to each control and add ``#f="ngForm`` or ``(ngSubmit)="onSubmitV2()`` to the form)
+- One-way binding (set default value for example using 
+``[ngModel]="myVar"``) 
+- Two-way binding (to automatically do something
+to the value for example, using ``[(ngModel)]="myVar"``).
+
+We can also group some controls for a long form or a group of controls have some special meaning, for example.
+To do this you can use wrap your controls with a ``div`` for example
+(can be a section, etc) and use ``ngModelGroup="userData"``.
+Like [here](./learn-angular/src/app/15-handling-forms/template-driven/template-driven.component.html#L8) and also use local referente to access
+this object.
+
+- ``formGroup.setValue({needAllObjectForm})``
+- ``formGRoup.patchValue({canBeSpecificProperty})``
+- ``formGroup.reset()`` - sem nada reseta todos (verificar se reseta
+para os valores especificados no [null, [Validators...]] na aborgagem
+reativa) e você pod passar também um objeto como no ``setValue()``.
 
 
-## Components
+## Reactive Approach
+
+Form is created programatically and syncronized with the DOM.
+You need ``ReactiveFormsModule``.
+
+We need create a ``FormGroup`` and yours related ``FormControl's``
+like:
+```ts
+this.signupForm = new FormGroup({
+  username: new FormControl(null),
+  email: new FormControl(null),
+  gender: new FormControl('Male'),
+});
+```
+Also need tell to Angular not create/infer a form like Template-Driven,
+you need pass by property binding your own form (in this case ``signupForm``)
+to the form tag to Angular correctly bind using ``<form [formGroup]="formGroup">``. Now the form HTML and you ``FormGroup`` are syncronized.
+But each control/input need be bind too with ``formControlName='name'``
+so that each input can be syncronzed with the ``formGroup`` and respective
+control with ``formControlName``.
+
+Validations are add in the Typescript code in each ``FormControl``
+like [here](./learn-angular/src/app/15-handling-forms/reactive-approach/reactive-approach.component.ts#L17).
+
+We can have nested ``FormGroup`` and to access them you need ``myForm.get('formGroup.controlName')``
+or group them by divs with ``formGroupName=nestedGroup``.
+[Example](./learn-angular/src/app/15-handling-forms/reactive-approach/reactive-approach.component.html#L5).
+
+# Components
 - New components are created inside the ``app`` folder by the CLI and you can specify the module if there is more than one using ``-m module-name``, use ``--path start-by-root/src/etc`` to specific path. Example:  
   > ``ng generate component name-component`` 
   
@@ -87,7 +151,7 @@ directly in the property.
 (inside component.ts) have high precedence and you can use multiples strings 
 to define css. 
 
-### CSS
+## CSS
   
 CSS is only applied to elements belonging to the component. Angular uses a trick
 to CSS don't have your default behavior (act in a whole document), by creating
@@ -122,7 +186,7 @@ decorator. The default value to view encapsulation is
 - Can i have selector that acts like a custom element, a property or class 
 like [here](./learn-angular/src/app/02-the-basics/servers/servers.component.ts).
 
-### Receiving Data
+## Receiving Data
 
 You can create custom properties in your component that can be received from
 outside, like a ``parent -> child`` sending data. 
@@ -142,7 +206,7 @@ Your child component ``ServerElementComponent`` define a custom property called 
   ></app-server-element>
 </div>
 ``` 
-### Sending Data
+## Sending Data
 
 You can create custom properties in your component that can send data to outside, like a ``parent <- child``. [Here's a example](./learn-angular/src/app/05-components-databinding/cockpit/cockpit.component.ts):
 
@@ -172,7 +236,7 @@ You can listen in a parent to those event emitters [like this](./learn-angular/s
 </div>
 ```
 
-### Local Reference In Templates
+## Local Reference In Templates
 
 You can use ``#someNameToReference`` in any HTML element from your template. By doing this you achieve a way to reference the own element itself anywhere on your template, but not in Typescript code. Example of naming a local reference and using it as a parameter to an event on a button:
 ```html
@@ -192,7 +256,8 @@ onAddServer(nameInput: HTMLInputElement) {
   this.serverCreated.emit({serverName: nameInput.value, serverContent: this.newServerContent});
 }
 ```
-### ViewChild
+## ViewChild
+
 ViewChild in Angular is a tool that allows you to access template elements directly in the component. When using the ``@ViewChild()`` syntax, it is possible to pass the name of the local reference and the type of the desired component, resulting in a search for the first occurrence of this element in the component template:
 ```ts
 @ViewChild('serverContentInput') serverContentInput: ElementRef;
@@ -218,7 +283,7 @@ A specific consideration for versions from Angular 8 onwards is the need to add 
 For Angular 9 versions from now on, just adding ``{ static: true }`` (if necessary) is enough, and adding ``{ static: false }`` is no longer necessary.
 
 
-### Content Projection
+## Content Projection
 > https://angular.io/guide/content-projection
 
 > [Single Slot](./learn-angular/src/app/05-components-databinding/server-element/server-element.component.html)
@@ -231,7 +296,7 @@ The ng-content directive is introduced as a hook, used as a selector in the comp
 This by default is single-slot content projection, but there are also multi-slot content projection and conditional content projection.
 
 
-### Lifecycle Hooks
+## Lifecycle Hooks
 > https://angular.dev/guide/components/lifecycle
 
 > [Lifecycle](./learn-angular/src/app/05-components-databinding/server-element/server-element.component.ts)
@@ -241,7 +306,7 @@ Exits some types of hooks, some of them are: hooks to view init and to
 content init (content are the HTML passed between tags).
 
 
-## Data Binding
+# Data Binding
 - Binding possibilities:
   - TS -> TEMPLATE: String interpolation ``{{ data }}`` or property binding ``[property] = "data"``. One-way. 
   - TS <- TEMPLATE: User events like ``(event) = "expression"``. One-way.
@@ -253,7 +318,7 @@ content init (content are the HTML passed between tags).
 - Types: interpolation, event, property, and two-way.
 
 
-## Directives
+# Directives
 
 Directives are classes that add additional behavior to elements in your Angular applications. Use Angular's built-in directives to manage forms, lists, styles, and what users see.
 
@@ -309,7 +374,7 @@ types (property, string interpolation, event and two-way). We can achive as a ex
 try to property bind in directive name, that is, ``appUnless``.
 
 
-## Services and DI
+# Services and DI
 
 Services are place to centralize business rules, use cases or state for those things, so that other components can interact with them.
 
@@ -317,7 +382,7 @@ A TS class without DI (constructor, for example) can be used as a service,
 but it's not recommend because with this approach you won't use Angular DI
 to handle the object lifecycle.
 
-### Hierarchical Injection
+## Hierarchical Injection
 
 Angular DI are build with the Hierarchical Injection.
 Thinking in a component tree, a service injected in a specific component
@@ -345,7 +410,7 @@ the decorator ``@Injectable(providedIn: 'root')``, when 'root' are for the
 all application like app module.
 
 
-## Routing
+# Routing
 
 With this, you can navigate between pages/components, pass parameters, query strings, load data, create rules with guards to some routes, load child
 routes using ``router-outlet`` and much more.
@@ -359,7 +424,7 @@ Always keep in mind that to deal with ambiguous paths/routes.
 
 You can organize routes using modules and than import them in ``AppModule`` to have a better code architecture.
 
-### Navigating
+## Navigating
 
 It's not cool to use reload in a SPA, so try to use always ``routerLink="some"`` or ``[routerLink]=['some', 10]`` to navigate away.
 
@@ -397,7 +462,7 @@ To get those things you can deal with the same ``ActivatedRoute`` getting
 [snapshot or observable](./learn-angular/src/app/11-changing-pages-with-routing/servers-11/edit-server-11/edit-server-11.component.ts#28)
 and remember to convert the data because is a string.
 
-### Handle Unknown Routes
+## Handle Unknown Routes
 
 To handle all unknown typed routes you can use ``**`` as wildcard being the
 last route. By default, Angular matches paths by prefix which means that the router checks URL elements from the left to see if the URL matches a specified path. For example, '/team/11/user' matches 'team/:id'. You can specify the path-match strategy ``pathMatch`` 'full' to make sure that the path covers the whole unconsumed URL. You can ``redirect`` to some routes too.
@@ -405,7 +470,7 @@ last route. By default, Angular matches paths by prefix which means that the rou
 In a module, the property ``exports: []`` exposes what is accessible from the
 module itself to who is imported.
 
-### Guards
+## Guards
 
 Guards are hooks when you enter and exit a route, respectively
 ``canActivate``, ``canActivateChild`` and ``canDeactivate``. You can protect the whole route
@@ -433,7 +498,7 @@ It works because when `EditServer` implements the guard the method in the contra
 
 You can pass data in routes using [data property](./learn-angular/src/app/11-changing-pages-with-routing/changing-pages-with-routing-artifacts.ts#L56). It's a valid approach to reuse code.
 
-### Resolvers - Load Data
+## Resolvers - Load Data
 
 To load some data before entering in route/load component you can use
 the interface (class-based) [Resolver](./learn-angular/src/app/11-changing-pages-with-routing/servers-11/server-11/server-resolver.service.ts) and use the property in a [route](./learn-angular/src/app/11-changing-pages-with-routing/changing-pages-with-routing-artifacts.ts#L50). To get the data, use ``ActivatedRoute`` with the same
@@ -444,7 +509,7 @@ You can the new approach with ``ResolveFn`` following the function-based
 approach. An [example](./learn-angular/src/app/11-changing-pages-with-routing/guards-functional.ts#L23) and getting the
 [data](./learn-angular/src/app/11-changing-pages-with-routing/changing-pages-with-routing-artifacts.ts#L43).
 
-### Location Strategies
+## Location Strategies
 > [Source](https://www.tektutorialshub.com/angular/angular-location-strategies/)
 
 There are two ways to navigate in Angular, this is called
@@ -475,7 +540,7 @@ To make HTML5 routing work you need to send the instruction to the webserver to 
 
 
 
-## RxJS 
+# RxJS 
 
 RxJS is a library for composing asynchronous and event-based programs by using observable sequences. It provides one core type, the Observable, satellite types (Observer, Schedulers, Subjects) and operators inspired by Array methods (map, filter, reduce, every, etc) to allow handling asynchronous events as collections.
 

@@ -38,22 +38,24 @@ export class TemplateDrivenComponent {
     });
   }
 
-  onSubmit(form: NgForm) { //i can get a HTMLFormElement (the tag itself)
+  onSubmitV1(form: NgForm) { //i can get a HTMLFormElement (the tag itself)
     console.log(form);
   }
 
-  // onSubmit() {
-  //   console.log();
-    
-  //   this.submitted = true;
+  onSubmitV2() {
+    console.log(this.signupForm);
+    this.submitted = true;
 
-  //   this.user.username = this.signupForm.value.userData.username;
-  //   this.user.email = this.signupForm.value.userData.email;
-  //   this.user.secretQuestion = this.signupForm.value.secret;
-  //   this.user.answer = this.signupForm.value.questionAnswer;
-  //   this.user.gender = this.signupForm.value.gender;
+    this.user.username = this.signupForm.value.userData.username;
+    this.user.email = this.signupForm.value.userData.email;
+    this.user.secretQuestion = this.signupForm.value.secret;
+    this.user.answer = this.signupForm.value.questionAnswer;
+    this.user.gender = this.signupForm.value.gender;
 
-  //   this.signupForm.reset();
-  // }
+    console.log(this.signupForm.form.controls['gender']);
+    console.log(this.signupForm.form.get('gender'));
+
+    this.signupForm.reset();
+  }
 
 }

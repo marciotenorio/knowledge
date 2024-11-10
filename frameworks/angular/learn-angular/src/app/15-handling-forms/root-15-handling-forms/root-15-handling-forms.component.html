@@ -1,1 +1,47 @@
-<app-template-driven></app-template-driven>
+<!-- <app-template-driven></app-template-driven> -->
+<app-reactive-approach></app-reactive-approach>
+
+<!-- <div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-of">
+            <form (ngSubmit)="submit(form)" #form="ngForm" autocomplete="off">
+                <div class="form-group" >
+                    <label for="email">Email</label>
+                    <input class="form-control"
+                        id="email"
+                        type="email" 
+                        name="email"
+                        ngModel
+                        email
+                        required
+                        #email="ngModel"
+                        autocomplete="off">
+                    <p *ngIf="email.invalid && email.touched" class="text-warning">Submit a valid value to this input.</p>
+
+                    <label for="dropdown">Select</label>
+                    <select id="dropdown" 
+                        name="dropdown" 
+                        [ngModel]="'Advanced'" 
+                        #dropdown="ngModel"
+                        class="form-control">
+                        <option *ngFor="let sub of subscriptions" [value]="sub">{{sub}}</option>
+                    </select>
+                    <p *ngIf="dropdown.invalid && dropdown.touched" class="text-warning">Submit a valid value to this input.</p>
+
+                    <label for="password" class="form-label">Password</label>
+                    <input
+                        type="password"
+                        class="form-control"
+                        name="password"
+                        id="password"
+                        ngModel
+                        required
+                        #password="ngModel">
+                    <p *ngIf="password.invalid && password.touched" class="text-warning">Submit a valid value to this input.</p>
+
+                    <button  class="btn btn-primary">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div> -->
