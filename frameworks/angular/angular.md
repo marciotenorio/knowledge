@@ -131,6 +131,32 @@ We can have nested ``FormGroup`` and to access them you need ``myForm.get('formG
 or group them by divs with ``formGroupName=nestedGroup``.
 [Example](./learn-angular/src/app/15-handling-forms/reactive-approach/reactive-approach.component.html#L5).
 
+``FormArray`` are the name suggests is used in dynamic controls, like a list of hobbie forms, for example 
+[here](./learn-angular/src/app/15-handling-forms/reactive-approach/reactive-approach.component.html#L31)
+
+We can create also our owns validators, for example like [here](./learn-angular/src/app/15-handling-forms/reactive-approach/reactive-approach.component.ts#L40)
+or [here](./learn-angular/src/app/15-handling-forms/reactive-approach/reactive-approach.component.ts#L20)
+in ``forbiddenText`` function.
+
+To cross-field validation, it's the same as a regular custom validator,
+but you put in the form itself (it still is a ``FormControll``, right?)
+to access all fields.
+
+Deal with erros in validation, you can display custom texts based on errors array of each control, 
+like [here.](./learn-angular/src/app/15-handling-forms/reactive-approach/reactive-approach.component.html#L11)
+
+Async validators also can be done to deal with expensive validations like HTTP calls, for example.
+[Here](./learn-angular/src/app/15-handling-forms/reactive-approach/reactive-approach.component.ts#L51)
+is a example to show this. Important to see that when the validation are being made is a specific state for this,
+there is a ``ng-pending`` class associated with the control that is resolve as soon as the validator are done.
+
+You can react to status and values changes in your control (each one and the whole form, a form is a control right?).
+[Here](./learn-angular/src/app/15-handling-forms/reactive-approach/reactive-approach.component.ts#L30) is a example of this changes.
+
+You at the end can use ``setValue``, ``patchValue`` and ``reset`` to programatically change the form.
+
+- [Official documentation]()
+
 # Components
 - New components are created inside the ``app`` folder by the CLI and you can specify the module if there is more than one using ``-m module-name``, use ``--path start-by-root/src/etc`` to specific path. Example:  
   > ``ng generate component name-component`` 
