@@ -6,6 +6,7 @@
 - [Start](#start)
 - [Forms](#forms)
 - [Components](#components)
+- [Pipes](#pipes)
 - [Data Binding](#data-binding)
 - [Directives](#directives)
 - [Services and DI](#services-and-di)
@@ -330,6 +331,24 @@ This by default is single-slot content projection, but there are also multi-slot
 
 Exits some types of hooks, some of them are: hooks to view init and to
 content init (content are the HTML passed between tags).
+
+
+# Pipes
+
+The main purpose of the pipes is to transform data at the moment when it will be display without change original data.
+
+A pipe accepts parameters just add ``:`` at the end of this name, to a pipe that has multiple parameters you can
+append at the end ``:`` then pass your parameter, like:
+```ts
+{{ server.started | date: 'fullDate' }}
+//or
+{{ server.someData | pipe: 'param1': 'param2' }}
+```
+
+Pay attention to the order. The next pipe will use the output of current data/pipe to use. 
+So does't make sense use: ``{{ someDate | uppercase | date }}``, because you can't uppercase a date.
+Instead it's correctly use: ``{{ someDate | date: 'fullDate' | uppercase }}``.
+
 
 
 # Data Binding

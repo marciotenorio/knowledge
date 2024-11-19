@@ -14,6 +14,7 @@ import { ErrorPage11Component } from './11-changing-pages-with-routing/error-pag
 import { USING_UNDERSTANDING_OBSERVABLES } from './13-understanding-observables/understanding-observables-artifacts';
 import { CommonModule } from '@angular/common';
 import { USING_HANDLING_FORMS } from './15-handling-forms/handling-forms-artifacts';
+import { USING_PIPES } from './17-pipes/pipes-artifacts';
 
 //Learn about standalone components later
 @NgModule({
@@ -26,8 +27,9 @@ import { USING_HANDLING_FORMS } from './15-handling-forms/handling-forms-artifac
     ...USING_CHANGING_PAGES_WITH_ROUTING,
     ...USING_UNDERSTANDING_OBSERVABLES,
     ...USING_HANDLING_FORMS,
+    ...USING_PIPES,
     NotFoundComponent,
-    ErrorPage11Component
+    ErrorPage11Component,
   ],
   imports: [
     CommonModule,
