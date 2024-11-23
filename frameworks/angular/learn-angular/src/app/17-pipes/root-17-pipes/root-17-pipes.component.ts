@@ -6,6 +6,12 @@ import { Component } from '@angular/core';
   styleUrl: './root-17-pipes.component.css'
 })
 export class Root17PipesComponent {
+  appStatus = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve('stable')
+    }, 2000)
+  });
+  filteredStatus = '';
   servers = [
     {
       instanceType: 'medium',
@@ -38,5 +44,16 @@ export class Root17PipesComponent {
       'list-group-item-warning': server.status === 'offline',
       'list-group-item-danger': server.status === 'critical'
     };
+  }
+
+  onAddServer() {
+    const rdn = Math.floor(Math.random() * 10);
+
+    this.servers.push({
+      instanceType: rdn % 2 == 0 ? 'small' : 'large',
+      name: `New Server - ${rdn}`,
+      status: rdn % 2 !== 0 ? 'stable' : 'offline',
+      started: new Date(15, 1, 2017)
+    });
   }
 }

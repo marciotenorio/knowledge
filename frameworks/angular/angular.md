@@ -349,6 +349,17 @@ Pay attention to the order. The next pipe will use the output of current data/pi
 So does't make sense use: ``{{ someDate | uppercase | date }}``, because you can't uppercase a date.
 Instead it's correctly use: ``{{ someDate | date: 'fullDate' | uppercase }}``.
 
+You can also apply pipes to [ngFor](https://v17.angular.io/api/common/NgFor#description). For example, to filter something like 
+[here](./learn-angular/src/app/17-pipes/root-17-pipes/root-17-pipes.component.html#L11)
+in template and the pipe [definition](./learn-angular/src/app/17-pipes/filter.pipe.ts). It's important to see that change the object/array don't
+trigger/rerun the pipe by default, only when you change the input for the
+pipe will trigger it.
+You can force this behavior, change the default to ``pure: true``, property
+to ``false``, but take care about performance in all
+recalculations being made on each data change in object/array.
+
+The ``async`` pipe work with promise and observables deal with the result.
+Just use something like ``{{ myData | async }}``.
 
 
 # Data Binding
