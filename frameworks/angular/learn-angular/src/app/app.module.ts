@@ -15,6 +15,8 @@ import { USING_UNDERSTANDING_OBSERVABLES } from './13-understanding-observables/
 import { CommonModule } from '@angular/common';
 import { USING_HANDLING_FORMS } from './15-handling-forms/handling-forms-artifacts';
 import { USING_PIPES } from './17-pipes/pipes-artifacts';
+import { USING_MAKING_HTTP_REQUESTS } from './18-making-http-requests/making-http-requests-artifacts';
+import { HttpClientModule } from '@angular/common/http';
 
 //Learn about standalone components later
 @NgModule({
@@ -28,6 +30,7 @@ import { USING_PIPES } from './17-pipes/pipes-artifacts';
     ...USING_UNDERSTANDING_OBSERVABLES,
     ...USING_HANDLING_FORMS,
     ...USING_PIPES,
+    ...USING_MAKING_HTTP_REQUESTS,
     NotFoundComponent,
     ErrorPage11Component,
   ],
@@ -36,7 +39,8 @@ import { USING_PIPES } from './17-pipes/pipes-artifacts';
     FormsModule, // only in template-driven approach
     ReactiveFormsModule,
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [
     ...INJECTING_SERVICES_AND_DI_ARTIFACTS,

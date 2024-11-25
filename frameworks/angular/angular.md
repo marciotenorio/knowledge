@@ -12,6 +12,7 @@
 - [Services and DI](#services-and-di)
 - [Routing](#routing)
 - [RxJS](#rxjs)
+- [Http](#http)
 
 
 # Start
@@ -625,6 +626,28 @@ and its derived types like: Subject and BehaviorSubject.
 how to use them in templates with variables and yours subscriptions.
 Another way is to use angular ``async`` pipe, that handles the
 disposing to Observables.
+
+
+
+# HTTP 
+
+You need to put ``HttpClientModule`` in ``imports`` to can use.
+
+> First of all, all http responses are wrapped in ``Observables``, so you need to 
+subscribe it to the request are made. ONLY after subscribe, will be sent
+the request and the response value.
+The ``Subscription`` are managed by Angular because is a observable 
+provided by them.
+
+A object put in a ``httpClient.post`` will be converted to JSON automatically
+by Angular.
+
+All http client methods are generic, so you can assign a type to each
+call to have a more robust and friendly code using like:
+``this.http.get<MyModel>('url')``.
+
+It's a good practice leave your component more "clean" possible, i'm mean,
+with less logic. Delegate to services complex works.
 
 
 
