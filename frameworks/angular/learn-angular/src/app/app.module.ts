@@ -16,7 +16,9 @@ import { CommonModule } from '@angular/common';
 import { USING_HANDLING_FORMS } from './15-handling-forms/handling-forms-artifacts';
 import { USING_PIPES } from './17-pipes/pipes-artifacts';
 import { USING_MAKING_HTTP_REQUESTS } from './18-making-http-requests/making-http-requests-artifacts';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule, provideHttpClient } from '@angular/common/http';
+import { AuthClassBasedInterceptor } from './auth-class-based.interceptor';
+import { FakeLoggingInterceptor } from './fake-logging.interceptor';
 
 //Learn about standalone components later
 @NgModule({
@@ -43,6 +45,18 @@ import { HttpClientModule } from '@angular/common/http';
     HttpClientModule
   ],
   providers: [
+    //First used in the interceptors chain
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthClassBasedInterceptor,
+      multi: true
+    },
+    //Second one used in the interceptors chain
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: FakeLoggingInterceptor,
+      multi: true
+    },
     ...INJECTING_SERVICES_AND_DI_ARTIFACTS,
     ...INJECTING_CHANGING_PAGES_WITH_ROUTING
   ],
