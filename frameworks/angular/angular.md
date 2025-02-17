@@ -12,7 +12,7 @@
 - [Services and DI](#services-and-di)
 - [Routing](#routing)
 - [RxJS](#rxjs)
-- [Http](#http)
+- [HTTP](#http)
 
 
 # Start
@@ -631,33 +631,154 @@ disposing to Observables.
 
 # HTTP 
 
-You need to put ``HttpClientModule`` in ``imports`` to can use.
+## Setup
 
-> First of all, all http responses are wrapped in ``Observables``, so you need to 
-subscribe it to the request are made. ONLY after subscribe, will be sent
-the request and the response value.
-The ``Subscription`` are managed by Angular because is a observable 
-provided by them.
+1. Go to the json-server folder
+2. npm i 
+3. npx json-server db.json
 
-A object put in a ``httpClient.post`` will be converted to JSON automatically
-by Angular.
+## Basics
 
-All http client methods are generic, so you can assign a type to each
-call to have a more robust and friendly code using like:
-``this.http.get<MyModel>('url')``.
+You need to put `HttpClientModule` in `imports` to can use.
 
-It's a good practice leave your component more "clean" possible, i'm mean,
-with less logic. Delegate to services complex works.
+> First of all, all http responses are wrapped in `Observables`, so you need to subscribe it to the request are made. ONLY after subscribe, will be sent the request and the response value. The `Subscription` are managed by Angular because is a observable provided by them.
 
+A object put in a `httpClient.post` will be converted to JSON automatically by Angular.
 
+All http client methods are generic, so you can assign a type to each call to have a more robust and friendly code using like: `this.http.get<MyModel>('url')`.
 
+It's a good practice leave your component more "clean" possible, I'm mean, with less logic. Delegate to services complex works.
 
+You can delegate(return Observable) or not to the HTTP call. Understand if the service caller need to receive the data or not.
 
+## Handling Errors
 
+There are some ways to work with erros:
+- Error in subscribe:
+```ts
+this.http
+  .post<Post>(this.basePath + '/posts', postData, { observe: 'response' })
+  .subscribe({
+	next: (responseData) => {
+	  console.log(responseData);
+	},
+	error: (error) => {
+	  //Do something
+	},
+  });
+```
 
+- For those some cases when your component can't subscribe in your HTTP call, you can create and exposes an ``error`` variable in your service that holds error that may occur in your calls. For example:
+```ts
+public error = new Subject<string>();
+//...
+createAndStore(title: string, content: string): void {
+	const postData = { title, content };
+	this.http
+		.post<Post>(this.basePath + '/posts', postData, { observe: 'response' })
+		.subscribe({
+	        next: (responseData) => {
+	          console.log(responseData);
+	        },
+	        error: (error) => {
+	          this.error.next(error.message);
+	        }
+	      });
+  }
+```
 
+- catchError can be used when the error happen in pipe:
+```ts
+ this.http.get<Post[]>(this.basePath + '/posts')
+      .pipe(
+        map((res) => {
+          return res; //only to remember that can use pipe transformations
+        }),
+        catchError((error) => {
+          //send to analytics, do whatever you want
+          return throwError(() => error);
+        })
+      );
+```
 
+## HTTP Call Customizations
 
+You can add:
+- Headers, QueryParams, Change ``responseType`` (JSON default) and receive different responses changing the ``observe`` flag and seeing HTTP events: 
+```ts
+this.http.get<Object>(url, {
+	// Default: 'body' 
+	// 'events' -> event(Sent, Response, etc) + response 
+	// 'response' -> Http code, body, etc
+	observe: 'events',
+	// Default: 'json', mas pode ser 'blob', 'text', etc.
+	responseType: 'json'
+	headers: new HttpHeaders({ 'Custom-Header-Example': 'Tony' }),
+	params: new HttpParams().set('myQueryParam', 'tony')
+})
+.pipe(
+	tap((event: any) => {
+		if (event.type == HttpEventType.Response)
+		  console.log('responsed event type');
+	})
+)
+.subscribe(res => console.log(res));
+```
 
+## Interceptors
 
+- [Knowledge](https://github.com/marciotenorio/knowledge/tree/main/frameworks/angular/learn-angular/src/app/18-making-http-requests)
+- [Official docs](https://v17.angular.io/guide/http-intercept-requests-and-responses)
+- [Migrate of class-based to functional](https://justangular.com/blog/migrate-angular-interceptors-to-function-based-interceptors)
 
+You can in a global way intercept all HTTP calls (request and response) made with your HTTPClient using interceptors. They are services because can be injected. 
+
+- The ``request`` parameter are immutable, so to modify it it's need to clone.
+- Important remember that the order when you define in ``app.module.ts`` matters, so that TOP-BOTTOM is executed to ``request`` and LOW-HIGH to the ``response``.
+- To use cli: ``ng g interceptor some-name --functional=false --skip-tests=true
+
+There are two types of interceptors:
+- Class-based
+```ts
+//app.module.ts
+//First used in the interceptors chain
+{
+  provide: HTTP_INTERCEPTORS,
+  useClass: AuthClassBasedInterceptor,
+  multi: true
+},
+//Second one used in the interceptors chain
+{
+  provide: HTTP_INTERCEPTORS,
+  useClass: FakeLoggingInterceptor,
+  multi: true
+},
+
+// File class
+@Injectable()
+export class FakeLoggingInterceptor implements HttpInterceptor {
+  intercept(request: HttpRequest<unknown>, next: HttpHandler):
+	  Observable<HttpEvent<unknown>> {
+	  
+    const modifiedReq = request.clone();
+    //Response -> can use pipe to change, execute some logic when
+    //the call are made with subscribe
+    return next.handle(modifiedReq).pipe(
+      tap(event => {
+        console.log('LOG - interceptor response', event)
+        if(event.type == HttpEventType.Response) {
+          console.log('LOG - interceptor of type response', event.body);
+        }
+      })
+    )
+  }
+}
+```
+
+- Function-based: 
+```ts
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  console.log('fn interceptor')
+  return next(req);
+};
+```
