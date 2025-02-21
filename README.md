@@ -7,6 +7,7 @@
 - [Fundamentals](fundamentals/fundamentals.md)
 - [Languages](languages/languages.md)
 - [Frameworks](frameworks/frameworks.md)
+- [DevOps](web/web.md)
 - [Web Development](web/web.md)
 - [Databases](dbs/dbs.md)
 
