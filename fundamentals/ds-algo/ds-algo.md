@@ -1,15 +1,20 @@
 # Algorithms and Data Structures
 
-## Summary
+# Summary
 
 - [. . /Fundamentals](../fundamentals.md)
 - [Basics](#basics)
 - [Asymptotic Analysis](#asymptotic-analysis)
-- [Sort](#)
+- [Sorting](#sorting)
 
-### Basics
+# Basics
 
 Some definitions to remember:
+
+- Eficácia | Corretude : Produz a saída esperada em tempo finito? -> qualidade do produz o resultado esperado, atinge objetivos.
+
+- Eficiência | Complexidade : essa é a melhor solução para o caso? -> capacidade de realizar tarefas, produtividade.
+
 - Data, register, memory, bit, byte, word, instruction, algorithm and process.
 
 - Process (Stack, Heap, Code Segment->Machine code and Data Segment->Global and static variables)
@@ -29,15 +34,29 @@ from memory.
 
 - Array -> Uniform data type and sequential || Struct -> not homogeneous data block
 
-### Asymptotic Analysis
+- Union -> Em C eles existe e são uma maneira de economizar memória. Se você tem uma struct insumo com dois
+campos: double volume e int peso. Você so guarda uma por insumo (liquido volume, outros é peso), então
+uma maneira de economizar é usar union pros dois por que ai ele aloca pro maior e quando um for preenchido
+o outro não será acessível e vice-versa. Lembrar de resposta do stackoverflow.
+- Memoization - expensive functional calls turned into pure functions (no side effects and always same 
+output for a given input). You can use a hashmap, for example.
+- Análise empirica e análise matemática de algoritmos.
 
-It's a mathematical approach based on limits to define an algorithm's complexity.
+# Asymptotic Analysis
+
+It's a mathematical approach based on limits to define complexity and space of algorithm's.
+Asymptotic means "for all enough large values".
+
+## Complexity
 
 Premises:
 
-> The execution time of an algorithm is the: cost to execute one instruction and the number of times of her are executed.
+> The execution time of an algorithm is the: cost to execute one instruction and the number 
+> of times of her are executed.
 > 
 >  "Simple" instruction have constant execution time.
+> 
+> The dominant term in a polynomial will determine your complexity.
 
 Some notations:
 
@@ -81,13 +100,50 @@ log_2 \space n = (i-1) * log_2 \space 2 \implies i = 1 + \log_2 n \  $$
 Take care only of the terms that define complexity, we have: $i = \log_2 n$ .
 
 
-### Sort
+## Space
 
-What is sorting
+Basically is based on input size of an algorithms.
+Has two major concerns:
 
-Stability
+- Fixed space - independent of input size
+- Not fixed space - dependent of input size
 
-Algorithms
+Uses the asymptotic notation as well.
+Keep in mind that always have the tradeoff between effience and space usage, so
+TYPICALLY more efficence means increase the space usage and less efficence means
+decrease of space usage.
+
+# Sorting
+
+Sorting refers to ordering data in an increasing or decreasing manner according to some linear 
+relationship among the data items. 
+No fim o resultado é uma permutação dos dados de maneira que obedeça uma relação de ordem.
+
+**ordering**: is basically a set of rules that determine what items come before, or after, what other item;\
+**sorting**: the proccess that actually arranging the sequence of items.
+
+Formally, the output of any sorting algorithm must satisfy two conditions:
+
+The output is in **monotonic** order (each element is no smaller/larger than the previous element, according to the required order).
+
+The output is a **permutation** (a reordering, yet retaining all of the original elements) of the input.
+
+É a permutação dos elementos a serem classificados
+
+## Stability
+
+Um algoritmo de ordenação é estável (= stable) se não altera a posição relativa dos elementos que 
+têm o mesmo valor.  Digamos, por exemplo, que um vetor de números do tipo double é ordenado 
+considerando apenas a parte inteira dos números (e ignorando a parte fracionária).  
+Se o algoritmo de ordenação for estável, os números que têm a mesma parte inteira continuarão 
+na mesma ordem relativa em que estavam originalmente. Na seguinte figura, a primeira linha mostra 
+o vetor original e a segunda, o vetor ordenado por um algoritmo estável:
+
+> 44.0	55.1	55.2	33.9	22.9	11.0	22.5	22.6\
+> 11.0	22.9	22.5	22.6	33.9	44.0	55.1	55.2
 
 
+## Algorithms
+
+[Java Implementation here](./java/ds-algo/src/main/java/br/tenorio/algo/Sort.java)
 
