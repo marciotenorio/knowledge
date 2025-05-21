@@ -45,6 +45,9 @@ public class HelloWorld {
 
     @Override
     public String toString() {
-        return STR."HelloWorld{id=\{id}, name='\{name}\{'\''}\{'}'}";
+        return "HelloWorld{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                '}';
     }
 }
