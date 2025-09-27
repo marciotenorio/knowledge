@@ -2,7 +2,6 @@
 
 using ConsoleCsharp.Basics;
 using ConsoleCsharp.Patterns;
-using ConsoleCsharp.Patterns.Mediator;
 using ConsoleCsharp.Service;
 using ConsoleCsharp.Topics;
 using Microsoft.VisualBasic;
@@ -34,11 +33,29 @@ public class Program
 		// Console.WriteLine("Path result is " + facadeConverter.ConvertAudio("c:/here", "mp3"));
 		// Console.WriteLine("Path result is " + facadeConverter.ConvertVideo("c:/here", "av"));
 
-		var textBox = new TextBox();
-		var button = new Button();
-		var _ = new ConcreteMediator(textBox, button);
+		//Mediator
+		// var textBox = new TextBox();
+		// var button = new Button();
+		// var _ = new ConcreteMediator(textBox, button);
 
-		textBox.FinishWrite("Márcio Tenório................");
-		textBox.FinishWrite("Márcio Tenório");
+		// textBox.FinishWrite("Márcio Tenório................");
+		// textBox.FinishWrite("Márcio Tenório");
+
+		//Strategy
+		// var tripCalculator = new TripCalculator();
+		// var carStrategy = new CarStrategy();
+
+		// tripCalculator.SetStrategy(carStrategy);
+		// System.Console.WriteLine(tripCalculator.BuildRoute("Touros", "Natal"));
+
+		// System.Console.WriteLine("---------------------------------------------");
+
+		// var legsStrategy = new LegsStrategy();
+		// tripCalculator.SetStrategy(legsStrategy);
+
+		// System.Console.WriteLine(tripCalculator.BuildRoute("Natal", "Touros"));
+
+		// tripCalculator.SetStrategy(null);
+		// tripCalculator.BuildRoute("", "");
 	}
 }
