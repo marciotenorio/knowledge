@@ -1,8 +1,11 @@
 ﻿
 
 using ConsoleCsharp.Basics;
+using ConsoleCsharp.Patterns;
+using ConsoleCsharp.Patterns.Mediator;
 using ConsoleCsharp.Service;
 using ConsoleCsharp.Topics;
+using Microsoft.VisualBasic;
 using System.Numerics;
 
 public class Program
@@ -25,7 +28,17 @@ public class Program
 
 		// DelegateEx delegateEx = new DelegateEx();
 		// AnonymousMethod anonymousMethod = new AnonymousMethod();
-		LambdaExpression le = new LambdaExpression();
+		// LambdaExpression le = new LambdaExpression();
 
+		// FacadeConverter facadeConverter = new FacadeConverter();
+		// Console.WriteLine("Path result is " + facadeConverter.ConvertAudio("c:/here", "mp3"));
+		// Console.WriteLine("Path result is " + facadeConverter.ConvertVideo("c:/here", "av"));
+
+		var textBox = new TextBox();
+		var button = new Button();
+		var _ = new ConcreteMediator(textBox, button);
+
+		textBox.FinishWrite("Márcio Tenório................");
+		textBox.FinishWrite("Márcio Tenório");
 	}
 }
