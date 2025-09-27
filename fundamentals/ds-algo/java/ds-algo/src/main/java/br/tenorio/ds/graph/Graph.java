@@ -1,5 +1,6 @@
 package br.tenorio.ds.graph;
 
+import java.lang.reflect.Array;
 import java.util.*;
 
 public class Graph {
@@ -90,5 +91,13 @@ public class Graph {
         var queue = new ArrayDeque<Graph>();
 
         return new Graph();
+    }
+
+    public static List<Integer> dijkstra(int[][] mat, int size) {
+        var visited = new boolean[size];
+        var distance = new int[size]; Arrays.fill(distance, Integer.MAX_VALUE);
+        var predecessor = new int[size];
+
+        
     }
 }

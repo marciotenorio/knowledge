@@ -1,25 +1,40 @@
 package br.tenorio;
 
-import br.tenorio.ds.graph.Graph;
-
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
-        var g0 = new Graph(0, null);
-        var g1 = new Graph(1, null);
-        var g2 = new Graph(2, null);
-        var g3 = new Graph(3, null);
-        var g4 = new Graph(4, null);
+//        System.out.println(fib(100));
+        System.out.println(coinProblem(10));
+    }
 
-        g0.setAdjacent(Arrays.asList(g1, g2, g3));
-        g1.setAdjacent(Arrays.asList(g0, g2));
-        g2.setAdjacent(Arrays.asList(g0, g1, g4));
-        g3.setAdjacent(List.of(g0));
-        g4.setAdjacent(List.of(g2));
+    public static Map<Long, Long> map = new HashMap<>();
+    public static List<Integer> coins = Arrays.asList(1, 3, 4);
 
-        var r = Graph.dfsIterativeWithStack(g0, 4);
-        System.out.println(r);
+    public static long fib(long n) {
+        if(n <= 1)
+            return n;
+
+        Long l = map.get(n);
+        if(l != null)
+            return l;
+
+        var ans = fib(n - 1) + fib(n - 2);
+        map.put(n, ans);
+        return ans;
+    }
+
+    public static int coinProblem(Integer n) {
+        if(n < 0)
+            return 1_000_000;
+        if(n == 0)
+            return 0;
+
+        Integer best = 1_000_000;
+        for (var coin : coins) {
+            best = Math.min(best, coinProblem(n - coin) + 1);
+        }
+
+        return best;
     }
 }
