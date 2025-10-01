@@ -2,6 +2,8 @@ using System.Reflection;
 using DotNetLearning.Configuration;
 using DotNetLearning.Database;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.FeatureManagement;
+using Microsoft.FeatureManagement.FeatureFilters;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -30,12 +32,20 @@ builder.Services.AddDbContext<DotNetLearningContext>(options =>
 });
 
 builder.Services.ResolveDepencies();
+//read more in https://timdeschryver.dev/blog/feature-flags-in-net-from-simple-to-more-advanced
+//default place is "FeatureManagement" in appsettings, but you can customize here
+builder.Services.AddFeatureManagement();
+    // .AddFeatureFilter<PercentageFilter>()
+    // .AddFeatureFilter<TimeWindowFilter>()
+    // .AddFeatureFilter<TargetingFilter>();
 
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
+    var devValue = app.Configuration?.GetSection("IsDevelopmentYesOfCourse")?.Get<string>() ?? "Not dev =(";
+    System.Console.WriteLine("=== " + devValue + " ===");
     app.UseSwagger();
     app.UseSwaggerUI();
 }
