@@ -11,7 +11,7 @@
 
 Some definitions to remember:
 
-- Eficácia | Corretude : Produz a saída esperada em tempo finito? -> qualidade do produz o resultado esperado, atinge objetivos.
+- Eficácia | Corretude : Produz a saída esperada em tempo finito? -> qualidade do que produz o resultado esperado, atinge objetivos.
 
 - Eficiência | Complexidade : essa é a melhor solução para o caso? -> capacidade de realizar tarefas, produtividade.
 
@@ -34,12 +34,14 @@ from memory.
 
 - Array -> Uniform data type and sequential || Struct -> not homogeneous data block
 
-- Union -> Em C eles existe e são uma maneira de economizar memória. Se você tem uma struct insumo com dois
+- Union -> Em C ele existe e são uma maneira de economizar memória. Se você tem uma struct insumo com dois
 campos: double volume e int peso. Você so guarda uma por insumo (liquido volume, outros é peso), então
 uma maneira de economizar é usar union pros dois por que ai ele aloca pro maior e quando um for preenchido
 o outro não será acessível e vice-versa. Lembrar de resposta do stackoverflow.
+
 - Memoization - expensive functional calls turned into pure functions (no side effects and always same 
 output for a given input). You can use a hashmap, for example.
+
 - Análise empirica e análise matemática de algoritmos.
 
 # Asymptotic Analysis
