@@ -1,4 +1,6 @@
-﻿using Lang.Basics;
+﻿using System.Runtime.CompilerServices;
+using Lang.Basics;
+using Microsoft.VisualBasic;
 
 namespace Lang;
 
@@ -66,7 +68,34 @@ public class Program
 
         // tripCalculator.SetStrategy(null);
         // tripCalculator.BuildRoute("", "");
-        
-        
+
+        //----------- ref, in and out -----------
+
+        System.Console.WriteLine("---- assign inside method ----");
+        var some1 = new SomeObject{ SomeInt = 1, SomeStr = "Some1" };
+        System.Console.WriteLine($"{RuntimeHelpers.GetHashCode(some1)}: {some1}");
+        OutRefIn.AssignInsideMethod(some1);
+        System.Console.WriteLine($"{RuntimeHelpers.GetHashCode(some1)}: {some1}");
+
+        System.Console.WriteLine("---- out ----");
+        var some2 = new SomeObject{ SomeInt = 2, SomeStr = "Some2" };
+        System.Console.WriteLine($"{RuntimeHelpers.GetHashCode(some2)}: {some2}");
+        OutRefIn.TryOut(out some2);
+        System.Console.WriteLine($"{RuntimeHelpers.GetHashCode(some2)}: {some2}");
+
+        OutRefIn.TryOut(out var outObjGenerated); //getting only the result
+
+        System.Console.WriteLine("---- ref ----");
+        var some3 = new SomeObject{ SomeInt = 3, SomeStr = "some3" };
+        System.Console.WriteLine($"{RuntimeHelpers.GetHashCode(some3)}: {some3}");
+        OutRefIn.TryRef(ref some3);
+        System.Console.WriteLine($"{RuntimeHelpers.GetHashCode(some3)}: {some3}");
+
+        System.Console.WriteLine("---- in ----");
+        var some4 = new SomeObject{ SomeInt = 4, SomeStr = "some4" };
+        System.Console.WriteLine($"{RuntimeHelpers.GetHashCode(some4)}: {some4}");
+        //you can omit the "in" and pass using ref (will be handled as "in" inside the method)
+        OutRefIn.TryIn(some4);
+        System.Console.WriteLine($"{RuntimeHelpers.GetHashCode(some4)}: {some4}");
     }
 }
