@@ -4,7 +4,7 @@
 
 # Summary
 
-- [Software Design](./top-level-abstractions/software.md)
+- [Software Design](top-level-abstractions/software.md)
 - [Fundamentals](fundamentals/fundamentals.md)
 - [Languages](languages/languages.md)
 - [Frameworks](frameworks/frameworks.md)

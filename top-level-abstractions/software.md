@@ -3,6 +3,9 @@
 # Summary
 
 - [. . /Home](../README.md)
+- [Clean Architecture](#clean-architecture)
+- [Hexagonal Architecture](#hexagonal-architecture)
+- [Domain Driven Design](#domain-driven-design---ddd)
 
 # Clean Architecture
 https://engsoftmoderna.info/artigos/arquitetura-limpa.html
@@ -28,7 +31,7 @@ https://engsoftmoderna.info/artigos/arquitetura-hexagonal.html
 
 ![https://engsoftmoderna.info/artigos/arquitetura-hexagonal.html](../img/hexagonal-arch.png)
 
-Also know as Port and Adapters, follow the same ideia of Clean Arch that need to be avoided technological dependence from frameworks, databases,
+Also know as Port and Adapters, follow the same idea of Clean Arch that need to be avoided technological dependence from frameworks, databases,
 focus on business rules, be easiest to test, etc.
 
 Divide system classes in two main groups:
@@ -37,21 +40,39 @@ Divide system classes in two main groups:
 
 Domain classes should not depend of infra, database, etc classes.
 
-# DDD
-- Core domain, supporting subdomain and generic subdomain
+# Domain Driven Design - DDD
+Focus on bring the domain problem concepts, naming conventions, contexts and terms to software building blocks, the ubiquitous language. 
+Achieving this by collaboration with domain experts and understanding the complexities. 
+DDD offer principles, practices and patterns do deal with this approach.
 
-## Building Blocks
-- Entity - has unique identifier. They are more important concept.
-- Value Object - has no unique identifier, they are characterized by its current state.
-- Aggregates - are agreggation/composition of objects handled as a unique abstraction. They are persisted and deleted as a unique too.
-- Repositories - they role is to get domain objects of database (even another source like other API?). Its a abstraction for database.
-- Domain services - carries business rules independente of objects and is stateless (here i think its about business state, only technical)
-- Anticorruption layer - Exchange communication between bounded contexts to not change their ubiquitous language and adapt to each other.
-Uses normally services, adapters and facades like: Sistema A -> [ Serviços -> Adaptadores -> Fachada ] -> Sistema B
-- Factories - create aggregates.
-- Bounded Context - separate ubiquatus language, like a module about library and other finance, when in the first has User and other user become Customer.
-- Context Mapping (shared kernel, customer-supplier, anticorruption layer)
+> Domain - this refers to the specific subject area or problem that the software system aims to address.
+>
+> Driven - the design of the software system is influenced by the features and needs of the domain. Rather than technical aspects.
+>
+> Design - the process of making a plan or blueprint of a software system (in this approach) driven by domain.
+
+## Strategic Design in DDD
+- Bounded Context - breaks down large, complex domains into smaller, more manageable parts. 
+Separate ubiquitous language / clear boundaries between concepts (even with same name), like a module about library and other finance, when in the first has User and other user become Customer.
+-  Context mapping - The process of defining relationships and interactions between different Bounded Contexts.
+Understand where context overlap or integrate, establishing clear communication and agreements.
+   - Shared Kernel - two contexts deliberately share a small part of the domain model or codebase.
+   - Partnership — two bounded contexts cooperate closely and coordinate changes.       
+   - Customer-Supplier - one context acts as the supplier (upstream), while another is the customer (downstream); the supplier takes the customer’s needs into account. Upstream listens to downstream needs.
+-  Strategic Patterns - General guidelines for organizing the architecture of a software system in alignment with the problem domain.
+   -  Aggregates - protects consistency inside domain model.
+   -  Domain Events - something that happened in the domain that you want other parts of the same domain (in-process) to be aware of.
+   -  Anti-Corruption Layer - contains all the logic necessary to translate between the two systems or bounded contexts.
+-  Shared Kernel - a strategic pattern that identifies common areas between different Bounded Contexts and establishes a shared subset of the domain model.
 - Architectural Layers: ui, application, domain, infra.
-- Rich entity - business rules together with entities, likes OO pray.
-- Domain event - An event is something that has happened in the past. A domain event is, something that happened in the domain that you want other parts of the same domain (in-process) to be aware of. The notified parts usually react somehow to the events.
-- Business Rules Always inside entities and aggregates.
+-  Ubiquitous Language - is a shared vocabulary that all stakeholders use consistently during software development, effectively capturing the relevant domain knowledge.
+Common goal is to share domain language among teams.
+
+## Tactical Design Patterns in DDD
+- Entity - has unique identifier. They are more important concept.
+- Rich entity - business rules together with entities, likes OOP pray.
+- Value Object - has no unique identifier, they are characterized by its current state.
+- Aggregates - are aggregation/composition of objects handled as a unique abstraction. They are persisted and deleted as a unique too. Has the root entity aggregate concept.
+- Repository - they role is to get domain objects of database (even another source like other API?). Its a abstraction for persistence. They encapsulate translation/mapping between those objects.
+- Factory - creational design pattern.
+- Service - carries business rules independent of objects and is stateless.
