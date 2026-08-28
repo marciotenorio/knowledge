@@ -76,3 +76,164 @@ Common goal is to share domain language among teams.
 - Repository - they role is to get domain objects of database (even another source like other API?). Its a abstraction for persistence. They encapsulate translation/mapping between those objects.
 - Factory - creational design pattern.
 - Service - carries business rules independent of objects and is stateless.
+
+
+# GRASP - General Responsibility Assignment Software Pattern
+
+It is a set of guidelines that helps you decide **which class should be responsible for what** in an object-oriented system.
+
+The core GRASP principles are:
+
+1. **Information Expert**
+   Give a responsibility to the class that already has the information needed to perform it.
+
+   Example: an `Order` knows its items, so `Order` should calculate its own total.
+
+2. **Creator**
+   A class should create another object when it closely owns, contains, or uses it.
+
+   Example: `Order` can create `OrderItem` objects.
+
+3. **Controller**
+   Use a class to receive requests from the UI/API and coordinate the work.
+
+   Example:
+
+   ```java
+   class OrderController {
+       void createOrder() {
+           // coordinates the use case
+       }
+   }
+   ```
+
+4. **Low Coupling**
+   Classes should have as few dependencies on other classes as possible.
+
+   Bad:
+
+   ```java
+   class Order {
+       MySQLDatabase db;
+       StripePayment payment;
+       EmailService email;
+   }
+   ```
+
+   Better: depend on abstractions and keep responsibilities separated.
+
+5. **High Cohesion**
+   A class should have a small set of closely related responsibilities.
+
+   Bad:
+
+   ```java
+   class User {
+       saveToDatabase();
+       sendEmail();
+       generatePDF();
+       calculateTax();
+   }
+   ```
+
+   That class is doing too much.
+
+6. **Polymorphism**
+   When behavior varies by type, use polymorphism instead of lots of `if`/`switch` statements.
+
+   Instead of:
+
+   ```java
+   if (paymentType == CREDIT_CARD) ...
+   else if (paymentType == PIX) ...
+   ```
+
+   use:
+
+   ```java
+   interface Payment {
+       void pay();
+   }
+
+   class CreditCardPayment implements Payment { ... }
+
+   class PixPayment implements Payment { ... }
+   ```
+
+7. **Pure Fabrication**
+   Sometimes you create a class that does not represent a real-world domain object, just to keep the design clean.
+
+   For example:
+
+   ```java
+   class UserRepository {
+       void save(User user) { ... }
+   }
+   ```
+
+   `UserRepository` isn't really a business object, but it's useful because it keeps persistence logic away from `User`.
+
+8. **Indirection**
+   Introduce an intermediate object to reduce coupling between two components.
+
+   For example:
+
+   ```text
+   Order → PaymentService → Stripe
+   ```
+
+   instead of:
+
+   ```text
+   Order → Stripe
+   ```
+
+9. **Protected Variations**
+   Identify things that are likely to change and hide them behind a stable interface.
+
+   For example:
+
+   ```java
+   interface PaymentGateway {
+       void charge();
+   }
+   ```
+
+   Then you can have:
+
+   ```text
+   StripePaymentGateway
+   PayPalPaymentGateway
+   MercadoPagoPaymentGateway
+   ```
+
+   Your business logic doesn't care which one is used.
+
+A useful way to think about **GRASP vs SOLID** is:
+
+* **GRASP:** “Where should this responsibility go?”
+* **SOLID:** “How should I structure these classes so the design stays maintainable?”
+
+For example, if you're building an e-commerce system and ask:
+
+> Who should calculate the order total?
+
+GRASP says: use **Information Expert** → probably `Order`, because `Order` already knows its items.
+
+```java
+class Order {
+    List<OrderItem> items;
+
+    Money total() {
+        return items.stream()
+            .map(OrderItem::subtotal)
+            .reduce(Money.ZERO, Money::add);
+    }
+}
+```
+
+So the main idea to remember is:
+
+**GRASP = principles for deciding which object gets which responsibility.**
+
+[Article on Wikipedia about GRASP](https://en.wikipedia.org/wiki/GRASP_(object-oriented_design))
