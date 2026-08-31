@@ -28,4 +28,4 @@
 #         distribution: 'temurin'
 #         cache: maven
 #     - name: Test with Maven
-#       run: mvn -f fundamentals/ds-algo/java/ds-algo test
+#       run: mvn -f labs/computer-science/algorithms-and-data-structures/java/ds-algo test

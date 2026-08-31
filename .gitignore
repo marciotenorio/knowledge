@@ -12,6 +12,15 @@ lerna-debug.log*
 /**/*bin/**
 /**/*obj/**
 .vscode/
+**/bin/
+**/obj/
+**/TestResults/
+*.dll
+*.exe
+*.pdb
+*.nupkg
+*.snupkg
+*.sln.DotSettings.user
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
@@ -123,6 +132,10 @@ dist
 
 # Compiled class file
 *.class
+
+# Build output
+**/target/
+**/out/
 
 # Log file
 *.log

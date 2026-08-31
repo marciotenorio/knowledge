@@ -4,17 +4,22 @@
 
 # Summary
 
-- [Software Design](top-level-abstractions/software.md)
-- [Fundamentals](fundamentals/fundamentals.md)
-- [Languages](languages/languages.md)
-- [Frameworks](frameworks/frameworks.md)
-- [DevOps](web/web.md)
-- [Web Development](web/web.md)
-- [Databases](dbs/dbs.md)
+- [Documentation](docs/index.md)
+- [Computer Science](docs/computer-science/index.md)
+- [Software Engineering](docs/software-engineering/index.md)
+- [Distributed Systems](docs/distributed-systems/index.md)
+- [Technologies](docs/technologies/index.md)
+- [DevOps](docs/devops/index.md)
+- [Web Development](docs/web-development/index.md)
+- [Databases](docs/databases/index.md)
+- [Labs](labs/index.md)
+- [Practice](practice/index.md)
+- [Projects](projects/index.md)
+- [Snippets](snippets/index.md)
 
 -----------
 
 <p align="left" style="display: inline-block;">
   <h4 style="display: inline-block;">Márcio Tenório &nbsp;&nbsp;</h3>
-  <img src="img/rn-flag-icon.png" style="display: inline-block;" alt="Rio Grande do Norte - Brasil">
+  <img src="assets/images/rn-flag-icon.png" style="display: inline-block;" alt="Rio Grande do Norte - Brasil">
 </p>

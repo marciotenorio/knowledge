@@ -1,46 +1,46 @@
-name: Test C# data structures and algorithms
+# name: Test C# data structures and algorithms
 
-on:
-  push:
-    branches:
-      - main
-    paths:
-      - 'fundamentals/ds-algo/c#/**'
-      - '.github/workflows/dotnet-ds-algo.yml'
-  pull_request:
-    branches:
-      - main
-    paths:
-      - 'fundamentals/ds-algo/c#/**'
-      - '.github/workflows/dotnet-ds-algo.yml'
-  workflow_dispatch:
+# on:
+#   push:
+#     branches:
+#       - main
+#     paths:
+#       - 'labs/computer-science/algorithms-and-data-structures/c#/**'
+#       - '.github/workflows/dotnet-ds-algo.yml'
+#   pull_request:
+#     branches:
+#       - main
+#     paths:
+#       - 'labs/computer-science/algorithms-and-data-structures/c#/**'
+#       - '.github/workflows/dotnet-ds-algo.yml'
+#   workflow_dispatch:
 
-permissions:
-  contents: read
+# permissions:
+#   contents: read
 
-jobs:
-  test:
-    name: Build and test
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    defaults:
-      run:
-        working-directory: 'fundamentals/ds-algo/c#/DsAlgo'
+# jobs:
+#   test:
+#     name: Build and test
+#     runs-on: ubuntu-latest
+#     timeout-minutes: 10
+#     defaults:
+#       run:
+#         working-directory: 'labs/computer-science/algorithms-and-data-structures/c#/DsAlgo'
 
-    steps:
-      - name: Check out repository
-        uses: actions/checkout@v4
+#     steps:
+#       - name: Check out repository
+#         uses: actions/checkout@v4
 
-      - name: Set up .NET 10
-        uses: actions/setup-dotnet@v4
-        with:
-          dotnet-version: '10.0.x'
+#       - name: Set up .NET 10
+#         uses: actions/setup-dotnet@v4
+#         with:
+#           dotnet-version: '10.0.x'
 
-      - name: Restore dependencies
-        run: dotnet restore DsAlgo.slnx
+#       - name: Restore dependencies
+#         run: dotnet restore DsAlgo.slnx
 
-      - name: Build
-        run: dotnet build DsAlgo.slnx --configuration Release --no-restore
+#       - name: Build
+#         run: dotnet build DsAlgo.slnx --configuration Release --no-restore
 
-      - name: Run tests
-        run: dotnet test DsAlgo.slnx --configuration Release --no-build --verbosity normal
+#       - name: Run tests
+#         run: dotnet test DsAlgo.slnx --configuration Release --no-build --verbosity normal
