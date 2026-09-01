@@ -1,13 +1,12 @@
 # Software Design
 
-# Summary
-
 - [. . /Home](../../README.md)
 - [SOLID](#solid)
 - [Clean Architecture](#clean-architecture)
 - [Hexagonal Architecture](#hexagonal-architecture)
 - [Domain Driven Design](#domain-driven-design---ddd)
 - [Grasp](#grasp---general-responsibility-assignment-software-pattern)
+- [OOP - Object-Oriented Programming](#oop---object-oriented-programming)
 
 # SOLID
 
@@ -288,3 +287,127 @@ So the main idea to remember is:
 **GRASP = principles for deciding which object gets which responsibility.**
 
 [Article on Wikipedia about GRASP](https://en.wikipedia.org/wiki/GRASP_(object-oriented_design))
+
+
+# OOP - Object-Oriented Programming
+
+## Fundamentals
+
+**Class and Object:** A class defines the structure and behavior of a type. An object is a concrete instance of that class created at runtime.
+
+**State and Behavior:** Objects combine state, represented by fields or properties, with behavior, represented by methods.
+
+**Constructor:** Defines how an object is created and helps guarantee that it starts in a valid state.
+
+**Access Modifiers:** Control which parts of an object are accessible from outside, such as `public`, `private`, and `protected`.
+
+**Encapsulation:** Protects an object's internal state and exposes controlled operations instead of allowing unrestricted modification.
+
+**Abstraction:** Exposes what an object can do while hiding unnecessary implementation details.
+
+**Inheritance:** Allows one type to specialize another and reuse or extend its behavior. It creates strong coupling and should be used only when a real "is-a" relationship exists.
+
+**Polymorphism:** Allows different implementations to be used through the same abstraction, with behavior determined by the concrete object.
+
+**Types of Polymorphism:**
+
+* **Subtype Polymorphism:** A subtype can be used wherever its base type or interface is expected. Method overriding and dynamic dispatch are common examples.
+* **Parametric Polymorphism:** The same code works with different types through type parameters or generics.
+* **Ad Hoc Polymorphism:** The same operation has different implementations for different types, commonly through method overloading or operator overloading.
+* **Coercion Polymorphism:** A value is implicitly or explicitly converted from one type to another so that an operation can be applied.
+
+## Object Relationships
+
+**Association:** A general relationship where one object knows about or interacts with another.
+
+**Aggregation:** A weak "has-a" relationship where the child object can exist independently from its owner.
+
+**Composition:** A strong "has-a" relationship where one object owns another object's lifecycle.
+
+**Composition over Inheritance:** Prefer combining objects with focused responsibilities instead of building deep inheritance hierarchies.
+
+**Delegation:** An object assigns part of its behavior to another object instead of implementing everything itself.
+
+## Contracts and Abstractions
+
+**Interface:** Defines a contract that multiple implementations can satisfy without defining how the behavior must be implemented.
+
+**Abstract Class:** Defines a base abstraction that may contain shared state, implemented behavior, and abstract operations.
+
+**Interface vs Abstract Class:** Prefer interfaces for contracts and flexibility. Use abstract classes when related types genuinely share behavior or state.
+
+**Method Overloading:** Multiple methods share the same name but have different parameter signatures, normally resolved at compile time.
+
+**Method Overriding:** A subtype replaces inherited behavior, enabling runtime polymorphism.
+
+**Static vs Dynamic Dispatch:** Static dispatch determines the called method at compile time, while dynamic dispatch selects the implementation at runtime.
+
+## Good Object Design
+
+**Cohesion:** A class should contain responsibilities that naturally belong together.
+
+**Coupling:** Objects should minimize unnecessary knowledge and dependencies on other objects.
+
+**Object Collaboration:** OOP systems are built around objects sending requests to each other and collaborating to perform larger behaviors.
+
+**Tell, Don't Ask:** Prefer telling an object what to do instead of extracting its data and implementing its behavior elsewhere.
+
+**Law of Demeter:** Objects should communicate mainly with their direct collaborators instead of navigating long chains of dependencies.
+
+**Immutability:** An immutable object's state cannot change after creation, reducing side effects and simplifying reasoning and concurrency.
+
+**Invariant:** A rule that must always remain true for an object. Good object design prevents invalid states from being created.
+
+## Identity and Equality
+
+**Object Identity:** Two objects may contain the same data while still representing different entities.
+
+**Value Equality:** Two objects are considered equal when their relevant values are equal.
+
+**Value Object:** An object defined entirely by its values, such as `Money`, `Coordinate`, or `DateRange`.
+
+**Entity:** An object defined primarily by its identity, even when its attributes change over time.
+
+## SOLID
+
+**Single Responsibility Principle:** A class should have one clear responsibility and one main reason to change.
+
+**Open/Closed Principle:** Software should allow new behavior to be added without constantly modifying stable existing code.
+
+**Liskov Substitution Principle:** A subtype must preserve the behavioral expectations of the type it replaces.
+
+**Interface Segregation Principle:** Prefer small and focused interfaces instead of forcing clients to depend on operations they do not use.
+
+**Dependency Inversion Principle:** High-level code should depend on abstractions rather than concrete implementations.
+
+## Intermediate and Advanced Concepts
+
+**Dependency Injection:** Dependencies are provided from outside an object instead of being created internally, reducing coupling and improving testability.
+
+**Upcasting:** Treating an object of a derived type as an instance of a base type or interface. Upcasting is generally implicit and safe because the derived type satisfies the base contract.
+
+**Downcasting:** Treating a reference to a base type as a more specific derived type. Downcasting is potentially unsafe because the referenced object may not actually be an instance of the target subtype, so it should be checked or avoided when possible.
+
+**Covariance:** Allows a more specific type to be used where a more general output type is expected. It is commonly associated with producers, return values, and safe upcasting.
+
+**Contravariance:** Allows a more general type to be used where a more specific input type is expected. It is commonly associated with consumers and parameter types.
+
+**Upcasting, Downcasting, and Variance:** Upcasting and downcasting describe conversions between individual object references in an inheritance hierarchy. Covariance and contravariance describe how compatible type relationships behave in generic or functional abstractions. Covariance generally preserves the direction of subtype relationships, while contravariance reverses it. Neither concept makes every downcast safe.
+
+**Rich Domain Model:** Business objects contain both state and meaningful business behavior.
+
+**Anemic Domain Model:** Domain objects mainly contain data while business behavior is implemented elsewhere. This can be appropriate for simple systems but problematic in complex domains.
+
+**Domain Modeling:** Models software around business concepts, behaviors, rules, and relationships instead of simply reproducing database structures.
+
+**Aggregate:** In Domain-Driven Design, a group of related objects that maintains consistency through a single aggregate root.
+
+**Design Patterns:** Reusable solutions to recurring design problems. Important examples include Strategy, Factory, Decorator, Adapter, Observer, Command, State, and Template Method. The goal is understanding the problem each pattern solves, not memorizing implementations.
+
+## Advanced Perspective
+
+**Object-Oriented Design:** Good OOP is primarily about defining responsibilities, boundaries, collaborations, and contracts between objects rather than simply creating classes.
+
+**Behavior over Data:** Prefer objects that protect their state and expose meaningful operations instead of becoming passive containers of getters and setters.
+
+**OOP Trade-offs:** OOP is one programming model among several. Functional, procedural, and data-oriented approaches may produce simpler solutions depending on the problem.
